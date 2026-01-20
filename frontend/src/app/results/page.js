@@ -180,42 +180,59 @@ export default function ResultsPage() {
             .join('\n\n');
     };
 
-    // Extract summaries
-    const rawHinglish = (typeof resultData?.explanation === 'object') ? resultData.explanation.hinglish : (resultData?.explanation || "No explanation available");
-    const rawEnglish = (typeof resultData?.explanation === 'object') ? resultData.explanation.english : resultData?.explanation;
+    // Helper to safely parse JSON content
+    const parseContent = (content) => {
+        if (!content) return {};
+        if (typeof content === 'object') return content;
+        try {
+            return JSON.parse(content);
+        } catch (e) {
+            return { Explanation: content };
+        }
+    };
 
-    // Mock data structure maintained for UI - replace with actual resultData
-    const mockData = {
+    const rawExplanation = (typeof resultData?.explanation === 'object')
+        ? (language === 'english' ? resultData.explanation.english : resultData.explanation.hinglish)
+        : resultData?.explanation;
+
+    const parsedExplanation = parseContent(rawExplanation);
+
+    // Dynamic Data Construction
+    const displayData = {
         documentType: resultData?.notice_type || "Government Notice",
-        title: resultData?.fileName || "Document Analysis",
-        issuingAuthority: "CivicSense AI",
+        // PRIORITY: Title from JSON > notice_type > filename
+        title: parsedExplanation["Title"] || resultData?.notice_type || resultData?.fileName || "Document Analysis",
+        noticeNo: parsedExplanation["Notice Number"] || "N/A",
+        issuingAuthority: parsedExplanation["Issuing Authority"] || "Government Authority",
         priority: resultData?.severity || "Medium Priority",
-        effectiveDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }),
-        deadline: "",
+        effectiveDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }), // Fallback current date
+        deadline: parsedExplanation["Important Deadlines"] || "Refer to notice",
         compliance: "ANALYZED",
-        daysToRespond: "",
-        hinglishSummary: String(formatContent(rawHinglish) || "No explanation available"),
-        englishSummary: String(rawEnglish
-            ? formatContent(rawEnglish)
-            : "This is a government notice. Please review carefully and take appropriate action."),
-        whoIsAffected: [
-            { icon: "👤", label: "All Citizens" }
-        ],
-        implications: resultData?.notice_type ? `This is a ${resultData?.notice_type}. Please review the details carefully.` : "Government notice requiring your attention.",
-        actionChecklist: [
-            {
-                title: "Review the notice carefully",
-                description: "Read through the entire notice to understand all requirements and deadlines."
-            },
-            {
-                title: "Gather required documents",
-                description: "Collect any documents or information mentioned in the notice."
-            },
-            {
-                title: "Take appropriate action",
-                description: "Follow the instructions provided and respond within the specified timeframe if required."
-            }
-        ],
+        daysToRespond: "Check Deadlines",
+
+        // Sections
+        explanation: parsedExplanation["Explanation"] || "No explanation available.",
+        reason: parsedExplanation["Reason"] || "Reason not specified.",
+        nextSteps: Array.isArray(parsedExplanation["Next Steps"])
+            ? parsedExplanation["Next Steps"]
+            : (parsedExplanation["Next Steps"] ? [parsedExplanation["Next Steps"]] : []),
+
+        deadlines: parsedExplanation["Important Deadlines"] || "No specific deadlines mentioned.",
+
+        whoIsAffected: parsedExplanation["Who is affected"]
+            ? (Array.isArray(parsedExplanation["Who is affected"])
+                ? parsedExplanation["Who is affected"].map(label => ({ icon: "👤", label }))
+                : [{ icon: "👤", label: parsedExplanation["Who is affected"] }])
+            : [{ icon: "👤", label: "All Citizens" }],
+
+        implications: parsedExplanation["Reason"] || "Please review the document carefully.",
+
+        actionChecklist: (Array.isArray(parsedExplanation["Next Steps"]) ? parsedExplanation["Next Steps"] : [])
+            .map(step => ({
+                title: step,
+                description: "Action required based on the notice."
+            })),
+
         applicableSchemes: {
             title: resultData?.scheme_suggestions && resultData?.scheme_suggestions.length > 0
                 ? resultData?.scheme_suggestions[0].name
@@ -232,6 +249,14 @@ export default function ResultsPage() {
                 }
         }
     };
+
+    // Ensure action checklist has items if parsing failed to produce array
+    if (displayData.actionChecklist.length === 0 && parsedExplanation["Next Steps"]) {
+        displayData.actionChecklist.push({
+            title: "Review Notice",
+            description: String(parsedExplanation["Next Steps"])
+        });
+    }
 
 
     return (
@@ -313,35 +338,35 @@ export default function ResultsPage() {
                         <div className="p-12 pb-8 border-b border-slate-200">
                             <div className="grid grid-cols-4 gap-6 text-xs mb-8">
                                 <div>
-                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Notice No: REG-23-UL</div>
-                                    <div className="text-slate-700 font-medium">{mockData.documentType}</div>
+                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Notice No: {displayData.noticeNo}</div>
                                 </div>
                                 <div>
                                     <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Issuing Authority</div>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-orange-600 font-bold text-sm">⚠ {mockData.priority}</span>
+                                        <div className="text-slate-700 font-medium">{displayData.issuingAuthority}</div>
+                                        <span className="text-orange-600 font-bold text-xs">⚠ {displayData.priority}</span>
                                     </div>
                                 </div>
                                 <div>
                                     <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Effective Date</div>
-                                    <div className="text-slate-700 font-medium">{mockData.effectiveDate}</div>
+                                    <div className="text-slate-700 font-medium">{displayData.effectiveDate}</div>
                                 </div>
                                 <div>
                                     <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Deadline</div>
-                                    <div className="text-slate-700 font-medium">{mockData.deadline}</div>
+                                    <div className="text-slate-700 font-medium">{typeof displayData.deadline === 'string' ? displayData.deadline.substring(0, 20) : "Check content"}</div>
                                 </div>
                             </div>
 
-                            <h1 className="text-5xl font-serif font-bold text-slate-900 mb-6 leading-tight">
-                                {mockData.title}
+                            <h1 className="text-5xl font-serif font-bold text-slate-900 mb-6 leading-tight break-words">
+                                {displayData.title}
                             </h1>
 
                             <div className="flex gap-3">
                                 <span className="bg-green-50 text-green-700 px-4 py-2 rounded text-xs font-bold uppercase tracking-wide border border-green-200">
-                                    ✓ {mockData.compliance}
+                                    ✓ {displayData.compliance}
                                 </span>
                                 <span className="bg-green-100 text-green-800 px-4 py-2 rounded text-xs font-bold uppercase tracking-wide">
-                                    ⏱ {mockData.daysToRespond}
+                                    ⏱ {displayData.daysToRespond}
                                 </span>
                             </div>
                         </div>
@@ -363,81 +388,39 @@ export default function ResultsPage() {
                                 </button>
                             </div>
                             <div className="space-y-6">
-                                {(() => {
-                                    const content = language === 'english' ? mockData.englishSummary : mockData.hinglishSummary;
-
-                                    // Parse content
-                                    let sections = {};
-                                    if (typeof content === 'string') {
-                                        const parts = content.split('\n\n');
-                                        parts.forEach(part => {
-                                            const [titleLine, ...bodyLines] = part.split(':\n');
-                                            if (titleLine && bodyLines.length) {
-                                                const title = titleLine.replace(/\*\*/g, '').trim();
-                                                sections[title] = bodyLines.join('\n');
-                                            }
-                                        });
-                                    } else if (typeof content === 'object' && content !== null) {
-                                        sections = content;
-                                    }
-
-                                    // Helper for sections
-                                    const renderSection = (title, icon, colorClass, bgClass) => {
-                                        // Case-insensitive key lookup
-                                        const key = Object.keys(sections).find(k => k.toLowerCase() === title.toLowerCase()) || title;
-                                        let text = sections[key];
-
-                                        if (!text) return null;
-
-                                        // Ensure text is renderable - convert objects to JSON string
-                                        if (typeof text === 'object' && !Array.isArray(text)) {
-                                            text = JSON.stringify(text, null, 2);
-                                        }
-
-                                        // Convert array to list if needed
-                                        const displayContent = Array.isArray(text)
-                                            ? <ul className="list-disc pl-5 mt-2 space-y-1">{text.map((item, i) => <li key={i}>{String(item)}</li>)}</ul>
-                                            : String(text);
-
-                                        return (
-                                            <div className={`p-4 rounded-lg border ${bgClass} ${colorClass.replace('text-', 'border-').replace('700', '200')}`}>
-                                                <h4 className={`text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2 ${colorClass}`}>
-                                                    {icon}
-                                                    {title}
-                                                </h4>
-                                                <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line pl-6">
-                                                    {displayContent}
-                                                </div>
-                                            </div>
-                                        );
-                                    };
-
-                                    // If we failed to parse or content is simple string
-                                    if (Object.keys(sections).length === 0) {
-                                        const safeContent = typeof content === 'object' ? JSON.stringify(content, null, 2) : String(content);
-                                        return <p className="text-slate-700 leading-relaxed text-base whitespace-pre-line">{safeContent}</p>;
-                                    }
-
-                                    return (
-                                        <div className="grid gap-4">
-                                            {renderSection("Explanation",
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>,
-                                                "text-blue-700", "bg-blue-50")}
-
-                                            {renderSection("Reason",
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>,
-                                                "text-amber-700", "bg-amber-50")}
-
-                                            {renderSection("Next Steps",
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 0 1 1.04-.208Z" clipRule="evenodd" /></svg>,
-                                                "text-green-700", "bg-green-50")}
-
-                                            {renderSection("Important Deadlines",
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" /></svg>,
-                                                "text-red-700", "bg-red-50")}
+                                <div className="grid gap-4">
+                                    <div className="p-4 rounded-lg border bg-blue-50 border-blue-200">
+                                        <h4 className="text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2 text-blue-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>
+                                            Explanation
+                                        </h4>
+                                        <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line pl-6">
+                                            {displayData.explanation}
                                         </div>
-                                    );
-                                })()}
+                                    </div>
+
+                                    <div className="p-4 rounded-lg border bg-amber-50 border-amber-200">
+                                        <h4 className="text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2 text-amber-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>
+                                            Reason
+                                        </h4>
+                                        <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line pl-6">
+                                            {displayData.reason}
+                                        </div>
+                                    </div>
+
+                                    {displayData.deadlines && (
+                                        <div className="p-4 rounded-lg border bg-red-50 border-red-200">
+                                            <h4 className="text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2 text-red-700">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" /></svg>
+                                                Important Deadlines
+                                            </h4>
+                                            <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line pl-6">
+                                                {displayData.deadlines}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
@@ -446,7 +429,7 @@ export default function ResultsPage() {
                             <div>
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Who is Affected</h3>
                                 <div className="space-y-4">
-                                    {mockData.whoIsAffected.map((item, idx) => (
+                                    {displayData.whoIsAffected.map((item, idx) => (
                                         <div key={idx} className="flex items-center gap-3">
                                             <span className="text-2xl">{item.icon}</span>
                                             <span className="text-sm text-slate-700">{item.label}</span>
@@ -458,27 +441,35 @@ export default function ResultsPage() {
                             <div>
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Context & Implications</h3>
                                 <p className="text-sm text-slate-600 leading-relaxed">
-                                    {mockData.implications}
+                                    {displayData.implications}
                                 </p>
                             </div>
                         </div>
 
-                        {/* Action Checklist */}
+                        {/* Action Checklist -> What you need to do next */}
                         <div className="p-12 border-b border-slate-200">
                             <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
-                                <span className="w-5 h-5 bg-slate-900 text-white grid place-items-center text-xs rounded">✓</span>
-                                Action Checklist
+                                <span className="w-5 h-5 bg-slate-900 text-white grid place-items-center text-xs rounded">➡</span>
+                                What you need to do next
                             </h3>
                             <div className="space-y-6">
-                                {mockData.actionChecklist.map((item, idx) => (
-                                    <div key={idx} className="flex gap-4">
-                                        <input type="checkbox" className="mt-1 w-4 h-4" />
-                                        <div>
-                                            <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
-                                            <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
-                                        </div>
+                                {displayData.actionChecklist.length > 0 ? (
+                                    <div className="grid gap-4">
+                                        {displayData.actionChecklist.map((item, idx) => (
+                                            <div key={idx} className="flex gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                                <div className="flex-shrink-0 w-8 h-8 bg-slate-200 text-slate-700 rounded-full flex items-center justify-center font-bold text-sm">
+                                                    {idx + 1}
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
+                                                    <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                ) : (
+                                    <p className="text-slate-500 italic">No specific actions found.</p>
+                                )}
                             </div>
                         </div>
 
@@ -490,12 +481,12 @@ export default function ResultsPage() {
                                 </svg>
                                 <div>
                                     <h3 className="text-sm font-bold text-green-900 uppercase tracking-wide mb-1">Eligible for Government Schemes</h3>
-                                    <h4 className="text-xl font-serif font-bold text-slate-900 mb-2">{mockData.applicableSchemes.title}</h4>
-                                    <p className="text-sm text-slate-600 mb-4">{mockData.applicableSchemes.description}</p>
+                                    <h4 className="text-xl font-serif font-bold text-slate-900 mb-2">{displayData.applicableSchemes.title}</h4>
+                                    <p className="text-sm text-slate-600 mb-4">{displayData.applicableSchemes.description}</p>
 
                                     <div className="bg-white border border-green-200 rounded p-4">
-                                        <h5 className="font-bold text-slate-900 mb-1">{mockData.applicableSchemes.incentive.title}</h5>
-                                        <p className="text-sm text-slate-600">{mockData.applicableSchemes.incentive.description}</p>
+                                        <h5 className="font-bold text-slate-900 mb-1">{displayData.applicableSchemes.incentive.title}</h5>
+                                        <p className="text-sm text-slate-600">{displayData.applicableSchemes.incentive.description}</p>
                                     </div>
                                 </div>
                             </div>

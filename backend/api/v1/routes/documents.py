@@ -72,3 +72,39 @@ async def get_document_history(
         ))
     
     return documents
+
+@router.delete("/{doc_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_document(
+    doc_id: str,
+    current_user = Depends(get_current_user)
+):
+    """
+    Delete a saved document
+    """
+    database = db.get_db()
+    if database is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database connection unavailable"
+        )
+
+    # Check validity of ObjectId
+    if not ObjectId.is_valid(doc_id):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid document ID"
+        )
+
+    # Delete document ensuring it belongs to current user
+    result = await database.documents.delete_one({
+        "_id": ObjectId(doc_id),
+        "user_id": str(current_user.id)
+    })
+
+    if result.deleted_count == 0:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document not found or access denied"
+        )
+    
+    return None
