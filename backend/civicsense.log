@@ -1,0 +1,96 @@
+2026-01-21 01:13:32,723 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 01:13:32,723 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 01:13:32,723 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 01:13:33,468 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 01:13:33,469 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 01:13:33,970 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 01:13:33,970 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 01:13:34,668 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 01:13:34,669 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 01:13:35,255 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 01:13:35,256 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 01:13:36,029 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 01:13:36,029 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 01:13:38,274 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 01:35:06,071 - api.auth - INFO - User logged in: Admin@gmail.com
+2026-01-21 01:37:14,962 - api.v1.routes.schemes - INFO - Finding schemes for: age=10, income=1000000
+2026-01-21 01:37:14,994 - api.v1.routes.schemes - INFO - Found 2 eligible schemes
+2026-01-21 01:37:27,350 - api.v1.routes.schemes - INFO - Finding schemes for: age=-1, income=1000000
+2026-01-21 01:38:03,631 - api.v1.routes.schemes - INFO - Finding schemes for: age=10, income=100000
+2026-01-21 01:38:03,645 - api.v1.routes.schemes - INFO - Found 3 eligible schemes
+2026-01-21 01:44:09,480 - api.v1.routes.schemes - INFO - Finding schemes for: age=10, income=100000
+2026-01-21 01:44:09,487 - api.v1.routes.schemes - INFO - Found 3 eligible schemes
+2026-01-21 01:44:50,407 - api.v1.routes.schemes - INFO - Finding schemes for: age=10, income=100000
+2026-01-21 01:44:50,408 - api.v1.routes.schemes - INFO - Found 3 eligible schemes
+2026-01-21 01:52:26,639 - core.database - INFO - MongoDB connection closed
+2026-01-21 01:58:00,747 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 01:58:00,748 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 01:58:00,748 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 01:58:01,299 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 01:58:01,299 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 01:58:01,299 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 01:58:01,361 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 01:58:01,361 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 01:58:02,015 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 01:58:02,015 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 01:58:02,019 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 01:58:02,019 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 01:58:02,650 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 01:58:02,651 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 01:58:02,655 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 01:58:02,655 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 01:58:03,209 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 01:58:03,209 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 01:58:03,210 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 01:58:03,210 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 01:58:03,726 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 01:58:03,726 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 01:58:03,738 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 01:58:03,738 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 01:58:04,126 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 01:58:04,137 - api.v1.routes.schemes - INFO - Returning 15 schemes
+2026-01-21 01:58:04,137 - api.v1.routes.schemes - INFO - Returning 15 schemes
+2026-01-21 01:58:04,146 - api.v1.routes.schemes - INFO - Finding schemes for: age=50, income=300000
+2026-01-21 01:58:04,146 - api.v1.routes.schemes - INFO - Finding schemes for: age=20, income=300000
+2026-01-21 01:58:04,148 - api.v1.routes.schemes - INFO - Found 8 eligible schemes
+2026-01-21 01:58:04,148 - api.v1.routes.schemes - INFO - Finding schemes for: age=124, income=300000
+2026-01-21 01:58:04,149 - api.v1.routes.schemes - INFO - Finding schemes for: age=124, income=300000
+2026-01-21 01:58:04,149 - api.v1.routes.schemes - INFO - Finding schemes for: age=124, income=300000
+2026-01-21 01:58:04,149 - api.v1.routes.schemes - INFO - Found 10 eligible schemes
+2026-01-21 01:58:04,567 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 01:58:04,567 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 01:58:21,501 - api.v1.routes.schemes - INFO - Finding schemes for: age=25, income=300000
+2026-01-21 01:58:21,502 - api.v1.routes.schemes - INFO - Found 10 eligible schemes
+2026-01-21 01:59:11,247 - api.v1.routes.schemes - INFO - Finding schemes for: age=20, income=100000
+2026-01-21 01:59:11,253 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:03:44,143 - api.v1.routes.schemes - INFO - Finding schemes for: age=20, income=100000
+2026-01-21 02:03:44,155 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:05:49,443 - api.v1.routes.schemes - INFO - Finding schemes for: age=24, income=300000
+2026-01-21 02:05:49,447 - api.v1.routes.schemes - INFO - Found 10 eligible schemes
+2026-01-21 02:11:57,915 - api.v1.routes.schemes - INFO - Finding schemes for: age=19, income=100000
+2026-01-21 02:11:57,918 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:36:31,730 - api.v1.routes.schemes - INFO - Finding schemes for: age=19, income=100000
+2026-01-21 02:36:31,745 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:37:10,055 - api.v1.routes.schemes - INFO - Finding schemes for: age=19, income=100000
+2026-01-21 02:37:10,057 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:37:10,949 - api.v1.routes.schemes - INFO - Finding schemes for: age=19, income=100000
+2026-01-21 02:37:10,950 - api.v1.routes.schemes - INFO - Found 14 eligible schemes
+2026-01-21 02:38:09,252 - core.database - INFO - MongoDB connection closed
+2026-01-21 02:38:10,751 - services.scheme_engine - INFO - Loaded 83 schemes from cache
+2026-01-21 02:38:10,751 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 02:38:10,751 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 02:38:11,358 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 02:38:11,359 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 02:38:11,952 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 02:38:11,952 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 02:38:12,641 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 02:38:12,641 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 02:38:13,205 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 02:38:13,205 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 02:38:13,697 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 02:38:13,697 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 02:38:14,002 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 02:39:14,240 - api.v1.routes.schemes - INFO - Finding schemes for: age=19, income=100000
+2026-01-21 02:39:14,242 - api.v1.routes.schemes - INFO - Found 68 eligible schemes
+2026-01-21 02:39:54,130 - api.v1.routes.schemes - INFO - Finding schemes for: age=20, income=100000
+2026-01-21 02:39:54,133 - api.v1.routes.schemes - INFO - Found 68 eligible schemes

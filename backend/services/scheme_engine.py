@@ -58,6 +58,7 @@ class SchemeEngine:
                 with open(SCHEMES_CACHE_FILE, 'r', encoding='utf-8') as f:
                     self.schemes = json.load(f)
                 logger.info(f"Loaded {len(self.schemes)} schemes from cache")
+                # Reload triggered for new schemes
             except Exception as e:
                 logger.error(f"Error loading cache: {e}")
                 self.schemes = []

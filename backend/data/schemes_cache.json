@@ -182,16 +182,1160 @@
         "apply_url": "https://pmkisan.gov.in/KCCHome.aspx"
     },
     {
+        "name": "National Apprenticeship Promotion Scheme",
+        "description": "Financial incentives to employers for hiring apprentices.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 35,
+        "state": "All",
+        "ministry": "Ministry of Skill Development",
+        "category": "Student",
+        "benefits": "25% of stipend paid by government, soft skills training",
+        "eligibility": "Youth seeking skill development and employment",
+        "apply_url": "https://apprenticeshipindia.gov.in/",
+        "tags": [
+            "Training",
+            "Employment",
+            "Skill Development"
+        ]
+    },
+    {
+        "name": "PM Shram Yogi Maandhan",
+        "description": "Pension scheme for unorganized sector workers.",
+        "max_income": 1500000,
+        "age_min": 18,
+        "age_max": 40,
+        "state": "All",
+        "ministry": "Ministry of Labour",
+        "category": "Unorganized Worker",
+        "benefits": "₹3000 monthly pension after 60 years",
+        "eligibility": "Unorganized workers with monthly income less than ₹15000",
+        "apply_url": "https://maandhan.in/",
+        "tags": [
+            "Pension",
+            "Social Security"
+        ]
+    },
+    {
+        "name": "PM Kusum Yojana",
+        "description": "Solar pump and grid-connected solar power for farmers.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 70,
+        "state": "All",
+        "ministry": "Ministry of Renewable Energy",
+        "category": "Farmer",
+        "benefits": "90% subsidy on solar pumps, income from selling power",
+        "eligibility": "Farmers and farmer groups",
+        "apply_url": "https://pmkusum.mnre.gov.in/",
+        "tags": [
+            "Solar Energy",
+            "Agriculture",
+            "Subsidy"
+        ]
+    },
+    {
+        "name": "Pradhan Mantri Rozgar Protsahan Yojana",
+        "description": "Employment generation scheme with EPF contribution support.",
+        "max_income": 1500000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "All",
+        "ministry": "Ministry of Labour",
+        "category": "Employed",
+        "benefits": "Government pays 12% EPF contribution for 3 years",
+        "eligibility": "New employees earning up to ₹15000/month",
+        "apply_url": "https://pmrpy.gov.in/",
+        "tags": [
+            "Employment",
+            "EPF",
+            "Job Creation"
+        ]
+    },
+    {
+        "name": "Beti Bachao Beti Padhao",
+        "description": "Scheme to promote education and welfare of girl child.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 21,
+        "state": "All",
+        "ministry": "Ministry of Women and Child Development",
+        "category": "Girl Child",
+        "benefits": "Educational scholarships and awareness programs",
+        "eligibility": "Girl children across India",
+        "apply_url": "https://wcd.nic.in/bbbp-schemes",
+        "tags": [
+            "Education",
+            "Women Empowerment",
+            "Girl Child"
+        ]
+    },
+    {
+        "name": "PM Street Vendor's AtmaNirbhar Nidhi",
+        "description": "Affordable working capital loan for street vendors.",
+        "max_income": 300000,
+        "age_min": 18,
+        "age_max": 65,
+        "state": "All",
+        "ministry": "Ministry of Housing and Urban Affairs",
+        "category": "Self-Employed",
+        "benefits": "Loan up to ₹10000 at subsidized interest",
+        "eligibility": "Street vendors affected by COVID-19",
+        "apply_url": "https://pmsvanidhi.mohua.gov.in/",
+        "tags": [
+            "Loan",
+            "Street Vendors",
+            "Self Employment"
+        ]
+    },
+    {
+        "name": "One Nation One Ration Card",
+        "description": "Portability of ration card across India.",
+        "max_income": 100000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Consumer Affairs",
+        "category": "BPL",
+        "benefits": "Access subsidized food grains anywhere in India",
+        "eligibility": "All ration card holders",
+        "apply_url": "https://nfsa.gov.in/",
+        "tags": [
+            "Food Security",
+            "Ration",
+            "BPL"
+        ]
+    },
+    {
+        "name": "National Education Policy Implementation",
+        "description": "Scholarships and support under NEP 2020.",
+        "max_income": 800000,
+        "age_min": 5,
+        "age_max": 30,
+        "state": "All",
+        "ministry": "Ministry of Education",
+        "category": "Student",
+        "benefits": "Free education up to class 12, scholarships for higher education",
+        "eligibility": "Students from economically weaker sections",
+        "apply_url": "https://www.education.gov.in/nep",
+        "tags": [
+            "Education",
+            "Scholarship",
+            "NEP 2020"
+        ]
+    },
+    {
+        "name": "PM Swasthya Suraksha Yojana",
+        "description": "Establishment of AIIMS and upgradation of medical institutions.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Health",
+        "category": "General",
+        "benefits": "Access to quality healthcare at affordable rates",
+        "eligibility": "All citizens",
+        "apply_url": "https://pmssy-mohfw.nic.in/",
+        "tags": [
+            "Healthcare",
+            "Medical",
+            "AIIMS"
+        ]
+    },
+    {
+        "name": "Digital India Initiative",
+        "description": "Digital literacy and empowerment program.",
+        "max_income": 999999999,
+        "age_min": 14,
+        "age_max": 65,
+        "state": "All",
+        "ministry": "Ministry of Electronics and IT",
+        "category": "General",
+        "benefits": "Free digital literacy training, internet access",
+        "eligibility": "Citizens willing to learn digital skills",
+        "apply_url": "https://digitalindia.gov.in/",
+        "tags": [
+            "Digital Literacy",
+            "Technology",
+            "Empowerment"
+        ]
+    },
+    {
+        "name": "PM Kaushal Vikas Yojana",
+        "description": "Skill training and certification for youth to improve employability.",
+        "max_income": 300000,
+        "age_min": 15,
+        "age_max": 45,
+        "state": "All",
+        "ministry": "Ministry of Skill Development",
+        "category": "Student",
+        "benefits": "Free skill training with government certification",
+        "eligibility": "Unemployed youth and school/college dropouts",
+        "apply_url": "https://www.pmkvyofficial.org/"
+    },
+    {
+        "name": "PM Jeevan Jyoti Bima Yojana",
+        "description": "Life insurance coverage at very low annual premium.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 50,
+        "state": "All",
+        "ministry": "Ministry of Finance",
+        "category": "Insurance",
+        "benefits": "₹2 lakh life insurance cover",
+        "eligibility": "Bank account holders aged 18–50",
+        "apply_url": "https://jansuraksha.gov.in/"
+    },
+    {
+        "name": "PM Suraksha Bima Yojana",
+        "description": "Accidental insurance coverage for citizens.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 70,
+        "state": "All",
+        "ministry": "Ministry of Finance",
+        "category": "Insurance",
+        "benefits": "₹2 lakh accidental death and disability cover",
+        "eligibility": "Bank account holders aged 18–70",
+        "apply_url": "https://jansuraksha.gov.in/"
+    },
+    {
+        "name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+        "description": "Skill development and placement for rural youth.",
+        "max_income": 200000,
+        "age_min": 15,
+        "age_max": 35,
+        "state": "All",
+        "ministry": "Ministry of Rural Development",
+        "category": "Rural",
+        "benefits": "Free training with placement assistance",
+        "eligibility": "Rural youth from poor families",
+        "apply_url": "https://ddugky.gov.in/"
+    },
+    {
         "name": "Stand Up India Scheme",
-        "description": "Loans between ₹10 lakh to ₹1 crore for SC/ST and women entrepreneurs.",
+        "description": "Loans for SC/ST and women entrepreneurs.",
         "max_income": 1000000,
         "age_min": 18,
         "age_max": 65,
         "state": "All",
         "ministry": "Ministry of Finance",
-        "category": "SC/ST/Women",
-        "benefits": "Bank loans for greenfield enterprises",
+        "category": "Business",
+        "benefits": "Loans between ₹10 lakh to ₹1 crore",
         "eligibility": "SC/ST and women entrepreneurs",
         "apply_url": "https://www.standupmitra.in/"
+    },
+    {
+        "name": "National Social Assistance Programme",
+        "description": "Financial assistance to elderly, widows, and disabled persons.",
+        "max_income": 100000,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Rural Development",
+        "category": "Social Welfare",
+        "benefits": "Monthly pension support",
+        "eligibility": "Elderly, widows, and disabled individuals from BPL families",
+        "apply_url": "https://nsap.nic.in/"
+    },
+    {
+        "name": "PM Garib Kalyan Anna Yojana",
+        "description": "Free food grains for economically weaker sections.",
+        "max_income": 100000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Consumer Affairs",
+        "category": "BPL",
+        "benefits": "Free rice/wheat every month",
+        "eligibility": "NFSA ration card holders",
+        "apply_url": "https://nfsa.gov.in/"
+    },
+    {
+        "name": "Startup India Scheme",
+        "description": "Support for startups through funding and tax benefits.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 65,
+        "state": "All",
+        "ministry": "Ministry of Commerce and Industry",
+        "category": "Startup",
+        "benefits": "Tax exemptions, funding support, incubation",
+        "eligibility": "Registered startups in India",
+        "apply_url": "https://www.startupindia.gov.in/"
+    },
+    {
+        "name": "PM E-Shram Yojana",
+        "description": "National database for unorganized sector workers.",
+        "max_income": 200000,
+        "age_min": 16,
+        "age_max": 59,
+        "state": "All",
+        "ministry": "Ministry of Labour",
+        "category": "Unorganized Worker",
+        "benefits": "Accidental insurance and access to welfare schemes",
+        "eligibility": "Unorganized sector workers",
+        "apply_url": "https://eshram.gov.in/"
+    },
+    {
+        "name": "Mission Shakti",
+        "description": "Women empowerment and safety initiative.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "All",
+        "ministry": "Ministry of Women and Child Development",
+        "category": "Women",
+        "benefits": "Skill training, financial assistance, safety programs",
+        "eligibility": "Women from rural and urban areas",
+        "apply_url": "https://wcd.nic.in/"
+    },
+    {
+        "name": "Majhi Kanya Bhagyashree Yojana",
+        "description": "Financial assistance and insurance for girl child.",
+        "max_income": 750000,
+        "age_min": 0,
+        "age_max": 18,
+        "state": "Maharashtra",
+        "ministry": "Department of Women and Child Development",
+        "category": "Girl Child",
+        "benefits": "₹50,000 deposit, education assistance and insurance cover",
+        "eligibility": "Girl child from Maharashtra resident families",
+        "apply_url": "https://womenchild.maharashtra.gov.in/"
+    },
+    {
+        "name": "Shiv Bhojan Yojana",
+        "description": "Subsidized meals for economically weaker sections.",
+        "max_income": 150000,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "Maharashtra",
+        "ministry": "Food and Civil Supplies Department",
+        "category": "BPL",
+        "benefits": "Nutritious meal at ₹10",
+        "eligibility": "Economically weaker citizens",
+        "apply_url": "https://mahafood.gov.in/"
+    },
+    {
+        "name": "Mukhyamantri Kanya Sumangala Yojana",
+        "description": "Financial support for girl child education.",
+        "max_income": 300000,
+        "age_min": 0,
+        "age_max": 18,
+        "state": "Uttar Pradesh",
+        "ministry": "Department of Women Welfare",
+        "category": "Girl Child",
+        "benefits": "₹15,000 in 6 installments",
+        "eligibility": "Girl child born in Uttar Pradesh",
+        "apply_url": "https://mksy.up.gov.in/"
+    },
+    {
+        "name": "CM Yuva Swarozgar Yojana",
+        "description": "Financial assistance for youth entrepreneurship.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 40,
+        "state": "Uttar Pradesh",
+        "ministry": "MSME Department",
+        "category": "Business",
+        "benefits": "Interest subsidy and loan assistance",
+        "eligibility": "Unemployed youth of Uttar Pradesh",
+        "apply_url": "https://msme.up.gov.in/"
+    },
+    {
+        "name": "Yuva Nidhi Scheme",
+        "description": "Unemployment allowance for educated youth.",
+        "max_income": 200000,
+        "age_min": 21,
+        "age_max": 35,
+        "state": "Karnataka",
+        "ministry": "Department of Skill Development",
+        "category": "Student",
+        "benefits": "₹3,000/month for graduates, ₹1,500 for diploma holders",
+        "eligibility": "Unemployed graduates/diploma holders",
+        "apply_url": "https://sevasindhu.karnataka.gov.in/"
+    },
+    {
+        "name": "Gruha Lakshmi Yojana",
+        "description": "Monthly financial support to women heads of households.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "Karnataka",
+        "ministry": "Department of Women and Child Development",
+        "category": "Women",
+        "benefits": "₹2,000 per month",
+        "eligibility": "Women head of BPL families",
+        "apply_url": "https://sevasindhu.karnataka.gov.in/"
+    },
+    {
+        "name": "PM Yashasvi Scholarship",
+        "description": "Top class school education for OBC/EBC/DNT students.",
+        "max_income": 250000,
+        "age_min": 14,
+        "age_max": 18,
+        "state": "All",
+        "ministry": "Ministry of Social Justice",
+        "category": "Student",
+        "benefits": "₹75,000 to ₹1.25 lakh per year",
+        "eligibility": "OBC/EBC/DNT students in class 9-12",
+        "apply_url": "https://scholarships.gov.in/",
+        "tags": [
+            "Education",
+            "Scholarship",
+            "OBC"
+        ]
+    },
+    {
+        "name": "Jal Jeevan Mission",
+        "description": "Tap water connection to every rural household.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Jal Shakti",
+        "category": "Infrastructure",
+        "benefits": "Piped water supply to households",
+        "eligibility": "All rural households",
+        "apply_url": "https://jaljeevanmission.gov.in/",
+        "tags": [
+            "Water",
+            "Rural Development",
+            "Infrastructure"
+        ]
+    },
+    {
+        "name": "PM Daksh Yojana",
+        "description": "Skill development for SC/ST/OBC youth.",
+        "max_income": 300000,
+        "age_min": 18,
+        "age_max": 45,
+        "state": "All",
+        "ministry": "Ministry of Social Justice",
+        "category": "Student",
+        "benefits": "Free skill training and placement support",
+        "eligibility": "SC/ST/OBC/EBC/DNT/Safai Karamcharis",
+        "apply_url": "https://pmdaksh.dosje.gov.in/",
+        "tags": [
+            "Skill Development",
+            "SC/ST",
+            "Training"
+        ]
+    },
+    {
+        "name": "Swachh Bharat Mission",
+        "description": "Toilet construction and sanitation awareness.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Jal Shakti",
+        "category": "Rural",
+        "benefits": "₹12,000 for toilet construction",
+        "eligibility": "Households without toilets",
+        "apply_url": "https://swachhbharatmission.gov.in/",
+        "tags": [
+            "Sanitation",
+            "Rural Development",
+            "Infrastructure"
+        ]
+    },
+    {
+        "name": "PM Kisan Maandhan Yojana",
+        "description": "Pension scheme for small and marginal farmers.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 40,
+        "state": "All",
+        "ministry": "Ministry of Agriculture",
+        "category": "Farmer",
+        "benefits": "₹3,000 monthly pension after 60 years",
+        "eligibility": "Small and marginal farmers aged 18-40",
+        "apply_url": "https://maandhan.in/",
+        "tags": [
+            "Pension",
+            "Farmer",
+            "Social Security"
+        ]
+    },
+    {
+        "name": "Rashtriya Gokul Mission",
+        "description": "Indigenous cattle breed conservation and development.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 70,
+        "state": "All",
+        "ministry": "Ministry of Fisheries, Animal Husbandry and Dairying",
+        "category": "Farmer",
+        "benefits": "Financial assistance for cattle breeding",
+        "eligibility": "Dairy farmers and breeders",
+        "apply_url": "https://dahd.nic.in/",
+        "tags": [
+            "Animal Husbandry",
+            "Dairy",
+            "Agriculture"
+        ]
+    },
+    {
+        "name": "Delhi Mukhyamantri Tirth Yatra Yojana",
+        "description": "Free pilgrimage for senior citizens.",
+        "max_income": 999999999,
+        "age_min": 60,
+        "age_max": 100,
+        "state": "Delhi",
+        "ministry": "Delhi Tourism",
+        "category": "Senior Citizen",
+        "benefits": "Free travel to religious places",
+        "eligibility": "Delhi residents aged 60+",
+        "apply_url": "https://delhi.gov.in/",
+        "tags": [
+            "Tourism",
+            "Senior Citizen",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "Ladli Behna Yojana",
+        "description": "Monthly financial assistance to women.",
+        "max_income": 250000,
+        "age_min": 23,
+        "age_max": 60,
+        "state": "Madhya Pradesh",
+        "ministry": "Department of Women and Child Development",
+        "category": "Women",
+        "benefits": "₹1,250 per month",
+        "eligibility": "Women from low-income families in MP",
+        "apply_url": "https://cmladlibahna.mp.gov.in/",
+        "tags": [
+            "Women Empowerment",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Namo Shetkari Maha Samman Yojana",
+        "description": "Financial assistance to farmers.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "Maharashtra",
+        "ministry": "Agriculture Department",
+        "category": "Farmer",
+        "benefits": "₹6,000 per year",
+        "eligibility": "All farmers in Maharashtra",
+        "apply_url": "https://mahadbt.maharashtra.gov.in/",
+        "tags": [
+            "Agriculture",
+            "Farmer",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Annapurna Free Food Scheme",
+        "description": "Free food grains for senior citizens.",
+        "max_income": 50000,
+        "age_min": 65,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Consumer Affairs",
+        "category": "Senior Citizen",
+        "benefits": "10 kg free food grains per month",
+        "eligibility": "Senior citizens not covered under NSAP",
+        "apply_url": "https://dfpd.gov.in/",
+        "tags": [
+            "Food Security",
+            "Senior Citizen",
+            "BPL"
+        ]
+    },
+    {
+        "name": "Kanyashree Prakalpa",
+        "description": "Conditional cash transfer for girl education.",
+        "max_income": 120000,
+        "age_min": 13,
+        "age_max": 18,
+        "state": "West Bengal",
+        "ministry": "Department of Women and Child Development",
+        "category": "Girl Child",
+        "benefits": "Annual scholarship of ₹1,000, one-time grant of ₹25,000",
+        "eligibility": "Girl students in West Bengal",
+        "apply_url": "https://wbkanyashree.gov.in/",
+        "tags": [
+            "Education",
+            "Girl Child",
+            "Scholarship"
+        ]
+    },
+    {
+        "name": "Amma Vodi Scheme",
+        "description": "Financial assistance for children education.",
+        "max_income": 200000,
+        "age_min": 5,
+        "age_max": 18,
+        "state": "Andhra Pradesh",
+        "ministry": "Department of Education",
+        "category": "Student",
+        "benefits": "₹15,000 per year to mothers",
+        "eligibility": "Mothers with school-going children in AP",
+        "apply_url": "https://navasakam.ap.gov.in/",
+        "tags": [
+            "Education",
+            "Financial Assistance",
+            "Women"
+        ]
+    },
+    {
+        "name": "Bihar Student Credit Card Scheme",
+        "description": "Education loan for higher studies upto ₹4 Lakhs.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 25,
+        "state": "Bihar",
+        "ministry": "Education Department",
+        "category": "Student",
+        "benefits": "Loan upto ₹4 Lakhs at very low interest",
+        "eligibility": "12th pass students from Bihar",
+        "apply_url": "https://www.7nishchay-yuvaupmission.bihar.gov.in/",
+        "tags": [
+            "Education",
+            "Loan",
+            "Student"
+        ]
+    },
+    {
+        "name": "Orunodoi Scheme",
+        "description": "Financial assistance to women members of poor families.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "Assam",
+        "ministry": "Finance Department",
+        "category": "Women",
+        "benefits": "₹1,250 per month",
+        "eligibility": "Permanent resident women of Assam",
+        "apply_url": "https://orunodoi.assam.gov.in/",
+        "tags": [
+            "Women Empowerment",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Godhan Nyay Yojana",
+        "description": "Procurement of cow dung from farmers/cattle rearers.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 80,
+        "state": "Chhattisgarh",
+        "ministry": "Department of Agriculture",
+        "category": "Farmer",
+        "benefits": "₹2 per kg for cow dung",
+        "eligibility": "Farmers and cattle rearers in Chhattisgarh",
+        "apply_url": "https://godhannyay.cg.nic.in/",
+        "tags": [
+            "Agriculture",
+            "Environment",
+            "Farmer"
+        ]
+    },
+    {
+        "name": "Griha Aadhar Scheme",
+        "description": "Monthly financial support for housewives.",
+        "max_income": 300000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "Goa",
+        "ministry": "Directorate of Women and Child Development",
+        "category": "Women",
+        "benefits": "₹1,500 per month",
+        "eligibility": "Married women Residents of Goa",
+        "apply_url": "https://goaonline.gov.in/",
+        "tags": [
+            "Women",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Vahli Dikri Yojana",
+        "description": "Financial assistance for girl child.",
+        "max_income": 200000,
+        "age_min": 0,
+        "age_max": 18,
+        "state": "Gujarat",
+        "ministry": "Women and Child Development Department",
+        "category": "Girl Child",
+        "benefits": "₹1,10,000 in three stages",
+        "eligibility": "Girl child born in Gujarat",
+        "apply_url": "https://wcd.gujarat.gov.in/",
+        "tags": [
+            "Girl Child",
+            "Financial Assistance",
+            "Women"
+        ]
+    },
+    {
+        "name": "Parivar Pehchan Patra",
+        "description": "Unique Family ID for accessing various schemes.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Haryana",
+        "ministry": "Citizen Resources Information Department",
+        "category": "General",
+        "benefits": "Integrated access to all state schemes",
+        "eligibility": "All families residing in Haryana",
+        "apply_url": "https://meraparivar.haryana.gov.in/",
+        "tags": [
+            "Identity",
+            "Welfare",
+            "General"
+        ]
+    },
+    {
+        "name": "Himcare Scheme",
+        "description": "Cashless treatment coverage for families not covered under PMJAY.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Himachal Pradesh",
+        "ministry": "Department of Health",
+        "category": "Health",
+        "benefits": "Up to ₹5 Lakhs health insurance per year",
+        "eligibility": "Residents of Himachal Pradesh",
+        "apply_url": "https://www.hpsbys.in/",
+        "tags": [
+            "Health",
+            "Insurance",
+            "Medical"
+        ]
+    },
+    {
+        "name": "Marang Gomke Jaipal Singh Munda Scholarship",
+        "description": "Overseas scholarship for tribal students.",
+        "max_income": 1200000,
+        "age_min": 21,
+        "age_max": 35,
+        "state": "Jharkhand",
+        "ministry": "Welfare Department",
+        "category": "Student",
+        "benefits": "Full tuition fees and maintenance for overseas studies",
+        "eligibility": "ST students from Jharkhand for Masters/MPhil",
+        "apply_url": "https://mgos.jharkhand.gov.in/",
+        "tags": [
+            "Education",
+            "Scholarship",
+            "Tribal"
+        ]
+    },
+    {
+        "name": "Karunya Health Scheme",
+        "description": "Financial assistance for medical treatment of poor.",
+        "max_income": 300000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Kerala",
+        "ministry": "Health Department",
+        "category": "Health",
+        "benefits": "Up to ₹5 Lakhs medical coverage",
+        "eligibility": "BPL and APL families with chronic illness",
+        "apply_url": "http://karunya.kerala.gov.in/",
+        "tags": [
+            "Health",
+            "Medical",
+            "Insurance"
+        ]
+    },
+    {
+        "name": "CM Hakshelgi Tengbang",
+        "description": "Cashless health protection scheme.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Manipur",
+        "ministry": "Health Department",
+        "category": "Health",
+        "benefits": "Up to ₹5 Lakhs for critical illness",
+        "eligibility": "Widows, Disabled, AAY card holders in Manipur",
+        "apply_url": "https://cmhtmanipur.gov.in/",
+        "tags": [
+            "Health",
+            "Insurance",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "FOCUS Scheme",
+        "description": "Financial assistance to producer groups.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 70,
+        "state": "Meghalaya",
+        "ministry": "Agriculture Department",
+        "category": "Farmer",
+        "benefits": "₹5,000 per household for producer groups",
+        "eligibility": "Farmers and producer groups in Meghalaya",
+        "apply_url": "https://meghalaya.gov.in/",
+        "tags": [
+            "Agriculture",
+            "Farmer",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Socio-Economic Development Policy (SEDP)",
+        "description": "Livelihood support for families.",
+        "max_income": 250000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "Mizoram",
+        "ministry": "Planning Department",
+        "category": "General",
+        "benefits": "Financial assistance upto ₹50,000 for livelihood",
+        "eligibility": "Permanent residents of Mizoram",
+        "apply_url": "https://sedp.mizoram.gov.in/",
+        "tags": [
+            "Livelihood",
+            "Development",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "CM Health Insurance Scheme",
+        "description": "Universal health insurance.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Nagaland",
+        "ministry": "Health and Family Welfare",
+        "category": "Health",
+        "benefits": "₹5 Lakhs health cover per family",
+        "eligibility": "All citizens of Nagaland",
+        "apply_url": "https://cmhis.nagaland.gov.in/",
+        "tags": [
+            "Health",
+            "Insurance",
+            "Universal"
+        ]
+    },
+    {
+        "name": "Biju Swasthya Kalyan Yojana",
+        "description": "Cashless treatment in empaneled hospitals.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Odisha",
+        "ministry": "Health Department",
+        "category": "Health",
+        "benefits": "₹5L for men, ₹10L for women per year",
+        "eligibility": "All families with BSKY card in Odisha",
+        "apply_url": "https://bsky.odisha.gov.in/",
+        "tags": [
+            "Health",
+            "Women",
+            "Insurance"
+        ]
+    },
+    {
+        "name": "Ashirwad Scheme",
+        "description": "Financial assistance for marriage of girls.",
+        "max_income": 32790,
+        "age_min": 18,
+        "age_max": 35,
+        "state": "Punjab",
+        "ministry": "Department of Social Justice",
+        "category": "Women",
+        "benefits": "₹51,000 for marriage",
+        "eligibility": "SC/BC/BPL families for daughter's marriage",
+        "apply_url": "http://punjab.gov.in/",
+        "tags": [
+            "Marriage",
+            "Women",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Chiranjeevi Swasthya Bima Yojana",
+        "description": "Universal health insurance coverage.",
+        "max_income": 800000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Rajasthan",
+        "ministry": "Medical and Health Department",
+        "category": "Health",
+        "benefits": "₹25 Lakhs health insurance coverage",
+        "eligibility": "All residents of Rajasthan",
+        "apply_url": "https://chiranjeevi.rajasthan.gov.in/",
+        "tags": [
+            "Health",
+            "Insurance",
+            "Universal"
+        ]
+    },
+    {
+        "name": "Aama Yojana",
+        "description": "Financial assistance to non-working mothers.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "Sikkim",
+        "ministry": "Social Welfare Department",
+        "category": "Women",
+        "benefits": "₹20,000 per year",
+        "eligibility": "Non-working mothers enrolled in electoral roll",
+        "apply_url": "https://sikkim.gov.in/",
+        "tags": [
+            "Women",
+            "Financial Assistance",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "Rythu Bandhu",
+        "description": "Investment support for agriculture.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "Telangana",
+        "ministry": "Agriculture Department",
+        "category": "Farmer",
+        "benefits": "₹10,000 per acre per year",
+        "eligibility": "All land-owning farmers in Telangana",
+        "apply_url": "http://rythubandhu.telangana.gov.in/",
+        "tags": [
+            "Agriculture",
+            "Farmer",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Amar Sarkar",
+        "description": "Platform to bridge gap between government and citizens.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "Tripura",
+        "ministry": "Rural Development Department",
+        "category": "General",
+        "benefits": "Easy access to 78 schemes including housing",
+        "eligibility": "Residents of Tripura",
+        "apply_url": "https://tripura.gov.in/",
+        "tags": [
+            "Governance",
+            "Housing",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "Ghasyari Kalyan Yojana",
+        "description": "Fodder kit distribution and support for women.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 65,
+        "state": "Uttarakhand",
+        "ministry": "Cooperative Department",
+        "category": "Women",
+        "benefits": "Subsidized cattle feed and kit",
+        "eligibility": "Rural women in hilly areas involved in cattle rearing",
+        "apply_url": "https://cooperative.uk.gov.in/",
+        "tags": [
+            "Women",
+            "Agriculture",
+            "Rural"
+        ]
+    },
+    {
+        "name": "Sehat Scheme",
+        "description": "Universal health insurance.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Jammu and Kashmir",
+        "ministry": "Health Department",
+        "category": "Health",
+        "benefits": "₹5 Lakhs health cover per family",
+        "eligibility": "All residents of J&K",
+        "apply_url": "https://kashmir.gov.in/",
+        "tags": [
+            "Health",
+            "Insurance",
+            "Universal"
+        ]
+    },
+    {
+        "name": "Arunachal Pradesh CM Paryatan Vikas Yojana",
+        "description": "Promote tourism and self-employment.",
+        "max_income": 500000,
+        "age_min": 18,
+        "age_max": 45,
+        "state": "Arunachal Pradesh",
+        "ministry": "Tourism Department",
+        "category": "Business",
+        "benefits": "Subsidy upto ₹5 Lakhs for tourism startups",
+        "eligibility": "Unemployed youth of Arunachal Pradesh",
+        "apply_url": "https://arunachaltourism.com/",
+        "tags": [
+            "Tourism",
+            "Business",
+            "Startup"
+        ]
+    },
+    {
+        "name": "Ladakh Rewa Scheme",
+        "description": "Support for meritorious students.",
+        "max_income": 600000,
+        "age_min": 15,
+        "age_max": 25,
+        "state": "Ladakh",
+        "ministry": "Education Department",
+        "category": "Student",
+        "benefits": "financial assistance for coaching for competitive exams",
+        "eligibility": "Meritorious students of Ladakh",
+        "apply_url": "https://ladakh.nic.in/",
+        "tags": [
+            "Education",
+            "Scholarship",
+            "Student"
+        ]
+    },
+    {
+        "name": "Lakshadweep Scholarship Scheme",
+        "description": "Scholarship for higher education.",
+        "max_income": 999999999,
+        "age_min": 16,
+        "age_max": 25,
+        "state": "Lakshadweep",
+        "ministry": "Department of Education",
+        "category": "Student",
+        "benefits": "Monthly stipend and fee reimbursement",
+        "eligibility": "Students from Lakshadweep studying on mainland",
+        "apply_url": "https://lakshadweep.gov.in/",
+        "tags": [
+            "Education",
+            "Scholarship",
+            "Student"
+        ]
+    },
+    {
+        "name": "Andaman & Nicobar Islands Housing Scheme",
+        "description": "Housing support for islanders.",
+        "max_income": 300000,
+        "age_min": 21,
+        "age_max": 60,
+        "state": "Andaman and Nicobar Islands",
+        "ministry": "Housing Department",
+        "category": "Housing",
+        "benefits": "Financial assistance for house construction",
+        "eligibility": "Permanent residents without house",
+        "apply_url": "https://andaman.gov.in/",
+        "tags": [
+            "Housing",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "Chandigarh Swayamsiddha Scheme",
+        "description": "Skill development for women.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 50,
+        "state": "Chandigarh",
+        "ministry": "Social Welfare Department",
+        "category": "Women",
+        "benefits": "Free vocational training",
+        "eligibility": "Women residents of Chandigarh",
+        "apply_url": "http://chandigarh.gov.in/",
+        "tags": [
+            "Women",
+            "Skill",
+            "Training"
+        ]
+    },
+    {
+        "name": "Puducherry Old Age Pension",
+        "description": "Pension for senior citizens.",
+        "max_income": 100000,
+        "age_min": 60,
+        "age_max": 100,
+        "state": "Puducherry",
+        "ministry": "Department of Women and Child Development",
+        "category": "Senior Citizen",
+        "benefits": "₹2000 - ₹3000 monthly pension",
+        "eligibility": "Residents of Puducherry aged 60+",
+        "apply_url": "https://py.gov.in/",
+        "tags": [
+            "Pension",
+            "Senior Citizen",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "Dadra & Nagar Haveli Divyang Pension",
+        "description": "Pension for differently-abled.",
+        "max_income": 100000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Dadra and Nagar Haveli and Daman and Diu",
+        "ministry": "Social Welfare",
+        "category": "Disabled",
+        "benefits": "Monthly pension support",
+        "eligibility": "Differently-abled residents",
+        "apply_url": "https://ddd.gov.in/",
+        "tags": [
+            "Pension",
+            "Disabled",
+            "Welfare"
+        ]
+    },
+    {
+        "name": "YSR Rythu Bharosa",
+        "description": "Financial assistance to farmers.",
+        "max_income": 999999999,
+        "age_min": 18,
+        "age_max": 100,
+        "state": "Andhra Pradesh",
+        "ministry": "Agriculture Department",
+        "category": "Farmer",
+        "benefits": "₹13,500 per year in 3 installments",
+        "eligibility": "All farmers in Andhra Pradesh",
+        "apply_url": "https://ysrrythubharosa.ap.gov.in/",
+        "tags": [
+            "Agriculture",
+            "Farmer",
+            "Financial Assistance"
+        ]
+    },
+    {
+        "name": "Pradhan Mantri Matritva Vandana Yojana",
+        "description": "Cash benefit to pregnant and lactating mothers.",
+        "max_income": 250000,
+        "age_min": 19,
+        "age_max": 45,
+        "state": "All",
+        "ministry": "Ministry of Women and Child Development",
+        "category": "Women",
+        "benefits": "₹5,000 in three installments",
+        "eligibility": "Pregnant and lactating mothers for first live birth",
+        "apply_url": "https://pmmvy.wcd.gov.in/",
+        "tags": [
+            "Women",
+            "Health",
+            "Maternity"
+        ]
+    },
+    {
+        "name": "Free Ration Scheme Tamil Nadu",
+        "description": "Free or subsidized ration for all families.",
+        "max_income": 999999999,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "Tamil Nadu",
+        "ministry": "Public Distribution System",
+        "category": "General",
+        "benefits": "Free rice and essentials",
+        "eligibility": "All ration card holders in Tamil Nadu",
+        "apply_url": "https://www.tnpds.gov.in/",
+        "tags": [
+            "Food Security",
+            "Ration",
+            "Social Welfare"
+        ]
     }
 ]

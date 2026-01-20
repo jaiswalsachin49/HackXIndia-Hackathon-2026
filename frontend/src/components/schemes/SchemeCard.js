@@ -1,4 +1,16 @@
+import { useRouter } from "next/navigation";
+
 export default function SchemeCard({ scheme }) {
+    const router = useRouter();
+
+    const handleViewDetails = () => {
+        // Save scheme to localStorage
+        localStorage.setItem('currentScheme', JSON.stringify(scheme));
+        // Navigate to detail page
+        const schemeId = scheme.name.toLowerCase().replace(/\s+/g, '-');
+        router.push(`/schemes/${schemeId}`);
+    };
+
     return (
         <div className="bg-white border border-slate-100 rounded-lg p-6 mb-4 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start mb-2">
@@ -31,7 +43,10 @@ export default function SchemeCard({ scheme }) {
             </p>
 
             <div className="flex items-center gap-6 text-xs font-bold text-slate-900 tracking-wide uppercase">
-                <button className="flex items-center gap-1 hover:text-[#2F5233] transition-colors group">
+                <button
+                    onClick={handleViewDetails}
+                    className="flex items-center gap-1 hover:text-[#2F5233] transition-colors group"
+                >
                     View Details
                     <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                 </button>
