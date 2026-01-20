@@ -64,6 +64,7 @@ async def get_document_history(
         documents.append(DocumentResponse(
             id=str(doc["_id"]),
             filename=doc["filename"],
+            title=doc.get("title"),
             notice_type=doc.get("notice_type"),
             severity=doc.get("severity"),
             explanation=doc["explanation"],

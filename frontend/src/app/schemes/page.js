@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Search, Filter, TrendingUp, Sparkles } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import FilterSidebar from "../../components/schemes/FilterSidebar";
@@ -18,10 +19,12 @@ export default function SchemesPage() {
     ministries: [],
     benefits: []
   });
-  const [allResults, setAllResults] = useState([]); // Store all results for filtering
+  const [allResults, setAllResults] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showEligibilityForm, setShowEligibilityForm] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("cs_token");
     if (!token) {
@@ -35,18 +38,17 @@ export default function SchemesPage() {
 
     let filtered = [...allResults];
 
-    // Filter by search query
     if (filters.search) {
       const query = filters.search.toLowerCase();
       filtered = filtered.filter(scheme =>
         scheme.name?.toLowerCase().includes(query) ||
         scheme.description?.toLowerCase().includes(query) ||
         scheme.ministry?.toLowerCase().includes(query) ||
-        scheme.tags?.some(tag => tag.toLowerCase().includes(query))
+        scheme.category?.toLowerCase().includes(query) ||
+        scheme.benefits?.toLowerCase().includes(query)
       );
     }
 
-    // Filter by ministries
     if (filters.ministries.length > 0) {
       filtered = filtered.filter(scheme =>
         filters.ministries.some(ministry =>
@@ -55,7 +57,6 @@ export default function SchemesPage() {
       );
     }
 
-    // Filter by benefit types
     if (filters.benefits.length > 0) {
       filtered = filtered.filter(scheme =>
         filters.benefits.some(benefit =>
@@ -65,159 +66,216 @@ export default function SchemesPage() {
       );
     }
 
-    // Sorting Logic
     if (sortBy === "Latest") {
-      // Since we don't have real dates, we'll reverse to show "newest" first (assuming bottom of list is newer)
-      // or sort by name as a proxy for deterministic sorting
       filtered.reverse();
-    } else {
-      // Relevance - currently just keep original order or maybe score matches (too complex for now)
-      // We'll leave it as is, which usually is by ID/insert order
     }
 
     setResults(filtered);
   }, [filters, allResults, searched, sortBy]);
 
   const handleTagClick = (tag) => {
-    const cleanTag = tag.replace("#", "");
-    setFilters(prev => ({ ...prev, search: cleanTag }));
+    setFilters(prev => ({ ...prev, search: tag }));
   };
 
-  const handleCheck = async (formData) => {
-    // Validate form
-    if (!formData.age || formData.age <= 0) {
-      setError("Please enter a valid age");
-      return;
-    }
+  const popularTags = ["Farmer", "Student", "BPL", "Business", "Girl Child", "Rural"];
 
+  const handleEligibilitySubmit = async (formData) => {
     setLoading(true);
     setError(null);
-    setSearched(true);
-
-    const body = {
-      age: Number(formData.age),
-      income: Number(formData.income),
-      occupation: formData.occupation,
-      state: formData.state,
-      category: formData.category || "General"
-    };
 
     try {
       const response = await fetch(`${API_BASE}/api/v1/find-schemes`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          age: Number(formData.age),
+          income: Number(formData.income),
+          occupation: formData.occupation,
+          state: formData.state,
+          category: formData.category || "General"
+        })
       });
 
-      if (!res.ok) {
-        throw new Error(`Server error: ${res.status}`);
-      }
+      const data = await response.json();
 
-      const data = await res.json();
-      setAllResults(data.eligible_schemes || []);
-      setResults(data.eligible_schemes || []);
-    } catch (e) {
-      console.error(e);
+      if (response.ok) {
+        setAllResults(data.eligible_schemes || []);
+        setResults(data.eligible_schemes || []);
+        setSearched(true);
+        setShowEligibilityForm(false);
+      } else {
+        setError(data.error || "An error occurred while fetching schemes");
+      }
+    } catch (err) {
+      console.error("Error fetching schemes:", err);
       setError("Failed to fetch schemes. Please check your connection and try again.");
-      setResults([]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
       <Header />
 
-      <div className="flex flex-1">
-        <FilterSidebar onFilterChange={setFilters} />
+      <main className="flex-grow">
+        <div className="flex">
+          <FilterSidebar onFilterChange={setFilters} />
 
-        <main className="flex-1 p-8 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-3">Government Schemes Directory</h1>
-            <p className="text-base md:text-lg text-slate-500 mb-10">Identify, verify, and apply for government initiatives tailored to your profile.</p>
-
-            <EligibilityForm onCheck={handleCheck} />
-
-            {/* Popular Search Tags */}
-            <div className="flex gap-2 flex-wrap mb-8">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest py-1">Popular Search Tags</span>
-              {["#SeniorCitizens", "#WomenEmpowerment", "#RuralHousing", "#StartupIndia", "#Scholarships"].map(tag => (
-                <button
-                  key={tag}
-                  onClick={() => handleTagClick(tag)}
-                  className="bg-slate-100 text-slate-600 text-[10px] px-2 py-1 rounded font-medium hover:bg-slate-200 cursor-pointer transition-colors border border-transparent hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-2">
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900">
-                Eligible Schemes {searched && `(${results.length})`}
-              </h2>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                Sort by:
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="border-none bg-transparent font-bold focus:outline-none cursor-pointer"
-                >
-                  <option value="Relevance">Relevance</option>
-                  <option value="Latest">Latest</option>
-                </select>
+          <div className="flex-1 py-8 px-6 lg:px-12">
+            {/* Hero Section */}
+            <div className="max-w-7xl mx-auto mb-12">
+              <div className="mb-4">
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-3">
+                  Government Schemes
+                </h1>
+                <p className="text-slate-500 text-base">
+                  Discover welfare programs tailored to your needs
+                </p>
               </div>
-            </div>
 
-            <div>
-              {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5">
-                    <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
-                  </svg>
-                  <div>
-                    <p className="text-red-800 font-semibold text-sm">Error</p>
-                    <p className="text-red-600 text-sm">{error}</p>
+              {/* Stats Bar */}
+              {searched && (
+                <div className="flex gap-4 mt-6">
+                  <div className="bg-white rounded-xl px-4 py-3 border border-slate-100 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#2F5233]/10 rounded-full flex items-center justify-center">
+                      <Filter className="w-5 h-5 text-[#2F5233]" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Found</p>
+                      <p className="text-lg font-bold text-slate-900">{results.length} Schemes</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl px-4 py-3 border border-slate-100 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#2F5233]/10 rounded-full flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-[#2F5233]" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Sort by</p>
+                      <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="text-sm font-bold text-slate-900 bg-transparent outline-none cursor-pointer"
+                      >
+                        <option value="Relevance">Relevance</option>
+                        <option value="Latest">Latest</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               )}
-
-              {loading ? (
-                <div className="flex flex-col items-center justify-center py-20">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900 mb-4"></div>
-                  <p className="text-slate-600">Finding eligible schemes...</p>
-                </div>
-              ) : searched ? (
-                results.length > 0 ? (
-                  results.map((scheme, idx) => (
-                    typeof scheme === 'string'
-                      ? <SchemeCard key={idx} scheme={{ name: scheme, description: "Description unavailable in simple mode.", ministry: "Government of India" }} />
-                      : <SchemeCard key={idx} scheme={scheme} />
-                  ))
-                ) : (
-                  <div className="text-center py-20 bg-slate-50 rounded-lg border border-slate-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 mx-auto mb-4 text-slate-300">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                    <h3 className="text-xl font-bold text-slate-700 mb-2">No Matching Schemes Found</h3>
-                    <p className="text-slate-500 max-w-md mx-auto">
-                      We couldn't find schemes matching your criteria. Try adjusting your age, income range, or occupation to see more results.
-                    </p>
-                  </div>
-                )
-              ) : (
-                <div className="text-center py-20 opacity-50">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 mx-auto mb-4 text-slate-300">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                  </svg>
-                  <p className="text-slate-600 text-lg">Fill out the form above to discover eligible schemes</p>
-                </div>
-              )}
             </div>
+
+            {/* Eligibility Form - Collapsible */}
+            {(!searched || showEligibilityForm) && (
+              <div className="max-w-7xl mx-auto mb-12">
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                  <div className="bg-gradient-to-r from-[#2F5233]/5 to-transparent p-6 border-b border-slate-100">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h2 className="text-xl font-serif font-bold text-slate-900 mb-1">
+                          Eligibility Check
+                        </h2>
+                        <p className="text-sm text-slate-500">
+                          Enter your details to find personalized scheme recommendations
+                        </p>
+                      </div>
+                      {searched && (
+                        <button
+                          onClick={() => setShowEligibilityForm(false)}
+                          className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors"
+                        >
+                          Close
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <EligibilityForm onCheck={handleEligibilitySubmit} loading={loading} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Popular Tags */}
+            {!searched && (
+              <div className="max-w-7xl mx-auto mb-12">
+                <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider mb-4">
+                  Popular Categories
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {popularTags.map(tag => (
+                    <button
+                      key={tag}
+                      onClick={() => handleTagClick(tag)}
+                      className="bg-white text-slate-700 px-5 py-2.5 rounded-full text-sm font-medium border border-slate-200 hover:border-[#2F5233] hover:bg-[#2F5233]/5 hover:text-[#2F5233] transition-all shadow-sm hover:shadow-md"
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <div className="max-w-7xl mx-auto mb-8">
+                <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
+                  {error}
+                </div>
+              </div>
+            )}
+
+            {/* Loading State */}
+            {loading && (
+              <div className="max-w-7xl mx-auto text-center py-20">
+                <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full shadow-lg border border-slate-100">
+                  <div className="w-5 h-5 border-2 border-[#2F5233] border-t-transparent rounded-full animate-spin"></div>
+                  <span className="text-sm font-bold text-slate-700">Finding schemes for you...</span>
+                </div>
+              </div>
+            )}
+
+            {/* Results Grid */}
+            {searched && !loading && results.length > 0 && (
+              <div className="max-w-7xl mx-auto">
+                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {results.map((scheme, index) => (
+                    <SchemeCard key={index} scheme={scheme} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* No Results */}
+            {searched && !loading && results.length === 0 && !error && (
+              <div className="max-w-7xl mx-auto text-center py-20">
+                <div className="inline-block p-4 bg-slate-100 rounded-full mb-4">
+                  <Search className="w-8 h-8 text-slate-400" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">No schemes found</h3>
+                <p className="text-slate-500 text-sm mb-6">
+                  Try adjusting your filters or search criteria
+                </p>
+                <button
+                  onClick={() => {
+                    setSearched(false);
+                    setResults([]);
+                    setAllResults([]);
+                    setFilters({ search: "", ministries: [], benefits: [] });
+                  }}
+                  className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#2F5233] transition-colors"
+                >
+                  Start New Search
+                </button>
+              </div>
+            )}
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
 
       <Footer />
       <LoginRequiredModal isOpen={showLoginModal} onClose={() => { }} />
