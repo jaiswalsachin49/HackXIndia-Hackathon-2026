@@ -92,29 +92,6 @@ def _simplify_with_gemini(prompt: str) -> str:
         raise Exception(f"Gemini API error: {e}")
 
 
-def _simplify_with_groq(prompt: str) -> str:
-    """Use Groq API with Mixtral for simplification - FAST & FREE!"""
-    try:
-        from groq import Groq
-        
-        client = Groq(api_key=GROQ_API_KEY)
-        
-        response = client.chat.completions.create(
-            model="mixtral-8x7b-32768",  # Fast, free tier available
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that explains government notices in simple Hinglish."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7,
-            max_tokens=500
-        )
-        
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        raise Exception(f"Groq API error: {e}")
-
-
-
 def _fallback_simplification(text: str, notice_type: str, severity: str) -> str:
     """Fallback rule-based simplification - extracts key info from actual text"""
     

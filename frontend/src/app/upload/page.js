@@ -26,11 +26,17 @@ export default function UploadPage() {
         body: formData,
       });
       const data = await res.json();
-      setResult(data);
+
+      // Store data and redirect to results page
+      localStorage.setItem('noticeResult', JSON.stringify(data));
+      localStorage.setItem('uploadedFile', file.name);
+      window.location.href = '/results';
+
     } catch (e) {
       console.error(e);
+      alert('Error processing your document. Please try again.');
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

@@ -9,7 +9,8 @@
         "ministry": "Ministry of Agriculture",
         "category": "Farmer",
         "benefits": "₹6000 annually in 3 installments",
-        "eligibility": "Small and marginal farmers with less than 2 hectares land"
+        "eligibility": "Small and marginal farmers with less than 2 hectares land",
+        "apply_url": "https://pmkisan.gov.in/"
     },
     {
         "name": "Ayushman Bharat (PMJAY)",
@@ -21,7 +22,8 @@
         "ministry": "Ministry of Health",
         "category": "General",
         "benefits": "₹5 lakh health cover per family per year",
-        "eligibility": "Economically weaker sections as per SECC database"
+        "eligibility": "Economically weaker sections as per SECC database",
+        "apply_url": "https://pmjay.gov.in/"
     },
     {
         "name": "PM Awas Yojana",
@@ -33,7 +35,8 @@
         "ministry": "Ministry of Housing",
         "category": "General",
         "benefits": "Up to ₹2.5 lakh subsidy for home construction",
-        "eligibility": "Families without pucca house"
+        "eligibility": "Families without pucca house",
+        "apply_url": "https://pmaymis.gov.in/"
     },
     {
         "name": "PM Mudra Yojana",
@@ -45,7 +48,8 @@
         "ministry": "Ministry of Finance",
         "category": "Business",
         "benefits": "Collateral-free loans from ₹50k to ₹10 lakh",
-        "eligibility": "Small business owners, vendors, artisans"
+        "eligibility": "Small business owners, vendors, artisans",
+        "apply_url": "https://www.mudra.org.in/"
     },
     {
         "name": "Sukanya Samriddhi Yojana",
@@ -57,7 +61,8 @@
         "ministry": "Ministry of Finance",
         "category": "Girl Child",
         "benefits": "High interest rate savings with tax benefits",
-        "eligibility": "Girl child below 10 years"
+        "eligibility": "Girl child below 10 years",
+        "apply_url": "https://www.nsiindia.gov.in/"
     },
     {
         "name": "PM Scholarship Scheme",
@@ -69,7 +74,8 @@
         "ministry": "Ministry of Defence",
         "category": "Student",
         "benefits": "₹2500/month for boys, ₹3000/month for girls",
-        "eligibility": "Children of ex-servicemen, police, railway employees"
+        "eligibility": "Children of ex-servicemen, police, railway employees",
+        "apply_url": "https://ksb.gov.in/"
     },
     {
         "name": "Pradhan Mantri Fasal Bima Yojana",
@@ -81,7 +87,8 @@
         "ministry": "Ministry of Agriculture",
         "category": "Farmer",
         "benefits": "Crop loss coverage due to natural disasters",
-        "eligibility": "All farmers including sharecroppers and tenant farmers"
+        "eligibility": "All farmers including sharecroppers and tenant farmers",
+        "apply_url": "https://pmfby.gov.in/"
     },
     {
         "name": "Atal Pension Yojana",
@@ -93,7 +100,8 @@
         "ministry": "Ministry of Finance",
         "category": "General",
         "benefits": "Fixed pension of ₹1000 to ₹5000 per month",
-        "eligibility": "All Indian citizens aged 18-40"
+        "eligibility": "All Indian citizens aged 18-40",
+        "apply_url": "https://npscra.nsdl.co.in/apy.php"
     },
     {
         "name": "PM Ujjwala Yojana",
@@ -105,7 +113,8 @@
         "ministry": "Ministry of Petroleum",
         "category": "BPL",
         "benefits": "Free LPG connection with ₹1600 assistance",
-        "eligibility": "Women from BPL families"
+        "eligibility": "Women from BPL families",
+        "apply_url": "https://www.pmujjwalayojana.com/"
     },
     {
         "name": "National Rural Livelihood Mission",
@@ -117,6 +126,72 @@
         "ministry": "Ministry of Rural Development",
         "category": "Rural",
         "benefits": "Skills training and financial assistance",
-        "eligibility": "Rural poor families, priority to women"
+        "eligibility": "Rural poor families, priority to women",
+        "apply_url": "https://aajeevika.gov.in/"
+    },
+    {
+        "name": "PM Vishwakarma Scheme",
+        "description": "Support for artisans and craftspeople with training & credit.",
+        "max_income": 300000,
+        "age_min": 18,
+        "age_max": 65,
+        "state": "All",
+        "ministry": "Ministry of MSME",
+        "category": "Artisan",
+        "benefits": "Training, toolkit assistance and credit support up to ₹3 lakh",
+        "eligibility": "Traditional artisans and craftspeople",
+        "apply_url": "https://pmvishwakarma.gov.in/"
+    },
+    {
+        "name": "Pradhan Mantri Jan Dhan Yojana",
+        "description": "Free bank account with ₹10000 overdraft facility.",
+        "max_income": 999999999,
+        "age_min": 10,
+        "age_max": 100,
+        "state": "All",
+        "ministry": "Ministry of Finance",
+        "category": "General",
+        "benefits": "Zero balance account with RuPay debit card and insurance",
+        "eligibility": "All Indian citizens",
+        "apply_url": "https://pmjdy.gov.in/"
+    },
+    {
+        "name": "PM Matru Vandana Yojana",
+        "description": "₹5000 cash benefit for pregnant and lactating mothers.",
+        "max_income": 250000,
+        "age_min": 18,
+        "age_max": 45,
+        "state": "All",
+        "ministry": "Ministry of Women and Child Development",
+        "category": "Women",
+        "benefits": "₹5000 in instalments for first live birth",
+        "eligibility": "Pregnant and lactating mothers",
+        "apply_url": "https://pmmvy.wcd.gov.in/"
+    },
+    {
+        "name": "Kisan Credit Card",
+        "description": "Affordable credit for farmers' agricultural needs.",
+        "max_income": 300000,
+        "age_min": 18,
+        "age_max": 70,
+        "state": "All",
+        "ministry": "Ministry of Agriculture",
+        "category": "Farmer",
+        "benefits": "Credit facility at subsidized interest rates",
+        "eligibility": "Farmers, fishermen, dairy farmers",
+        "apply_url": "https://pmkisan.gov.in/KCCHome.aspx"
+    },
+    {
+        "name": "Stand Up India Scheme",
+        "description": "Loans between ₹10 lakh to ₹1 crore for SC/ST and women entrepreneurs.",
+        "max_income": 1000000,
+        "age_min": 18,
+        "age_max": 65,
+        "state": "All",
+        "ministry": "Ministry of Finance",
+        "category": "SC/ST/Women",
+        "benefits": "Bank loans for greenfield enterprises",
+        "eligibility": "SC/ST and women entrepreneurs",
+        "apply_url": "https://www.standupmitra.in/"
     }
 ]

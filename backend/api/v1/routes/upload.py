@@ -28,11 +28,17 @@ async def upload_notice(file: UploadFile = File(...)):
         
         text = extract_text(file)
         
-        if not text or len(text.strip()) < 10:
+        logger.info(f"Extracted text length: {len(text)} characters")
+        
+        # More lenient validation - allow shorter text for demo
+        if not text or len(text.strip()) < 5:
+            logger.warning(f"Insufficient text extracted: '{text[:100]}'")
             raise HTTPException(
                 status_code=400,
-                detail="Could not extract sufficient text from the document. Please ensure the image is clear."
+                detail=f"Could not extract sufficient text ({len(text)} characters). Please ensure the image/PDF contains readable text and is clear."
             )
+        
+        logger.debug(f"Extracted text preview: {text[:100]}...")
         
         notice_type = classify_notice(text)
         severity = analyze_severity(text)

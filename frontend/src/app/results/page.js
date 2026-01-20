@@ -1,52 +1,90 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 export default function ResultsPage() {
     const router = useRouter();
+    const [resultData, setResultData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    // Mock data - will be replaced with actual API response
+    useEffect(() => {
+        // Load data from localStorage
+        const storedData = localStorage.getItem('noticeResult');
+        const fileName = localStorage.getItem('uploadedFile');
+
+        if (storedData) {
+            const data = JSON.parse(storedData);
+            setResultData({
+                ...data,
+                fileName: fileName || 'Uploaded Document'
+            });
+            setLoading(false);
+        } else {
+            // No data found, redirect to upload
+            router.push('/upload');
+        }
+    }, [router]);
+
+    if (loading || !resultData) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900 mx-auto mb-4"></div>
+                    <p className="text-slate-600">Loading results...</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Mock data structure maintained for UI - replace with actual resultData
     const mockData = {
-        documentType: "Administrative Document",
-        title: "Regulation on Urban Waste Management Updates",
-        issuingAuthority: "Ministry of Urban Affairs",
-        priority: "High Priority",
-        effectiveDate: "Nov 01, 2023",
-        deadline: "Dec 14, 2023",
-        compliance: "IN COMPLIANCE",
-        daysToRespond: "6 DAYS TO RESPOND",
-        hinglishSummary: "Yeh naya regulation urban areas mein waste management ke liye strict guidelines deta hai. Isme kaha gaya hai ki sabhi businesses ko apna waste segregate karna zaroori hai (wet aur dry waste alag-alag). Agar aapne compliance nahi kiya, toh heavy fines lag sakte hain.\n\nSarkar ka kehna hai ki yeh rules ajle mahine se lagu honge. Isliye sabhi ghar aur factories ko turant apne systems ko update karna padega. Jiska main maqsad shehron ko saaf rakhna aur landfill burden kam karna hai.",
+        documentType: resultData.notice_type || "Government Notice",
+        title: resultData.fileName || "Document Analysis",
+        issuingAuthority: "CivicSense AI",
+        priority: resultData.severity || "Medium Priority",
+        effectiveDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }),
+        deadline: "",
+        compliance: "ANALYZED",
+        daysToRespond: "",
+        hinglishSummary: resultData.explanation || "No explanation available",
         whoIsAffected: [
-            { icon: "🏢", label: "Small Business Owners" },
-            { icon: "🏭", label: "Industrial Units" },
-            { icon: "🏘️", label: "Housing Societies (>50 units)" }
+            { icon: "👤", label: "All Citizens" }
         ],
-        implications: "The Ministry has observed that mixed waste disposal at municipal sites continues to violate capacity limits. This amendment shifts the responsibility of primary segregation to the waste generator. This mandate is applicable for the collection process. New compliance checks will begin randomly from December 1st.",
+        implications: resultData.notice_type ? `This is a ${resultData.notice_type}. Please review the details carefully.` : "Government notice requiring your attention.",
         actionChecklist: [
             {
-                title: "Audit current waste disposal system",
-                description: "Review how your establishment currently handles wet and dry waste. Ensure you have distinct color-coded bins (Green for Wet, Blue for Dry)."
+                title: "Review the notice carefully",
+                description: "Read through the entire notice to understand all requirements and deadlines."
             },
             {
-                title: "Register on Municipal Portal",
-                description: "Log in to your local municipal corporation website and update your 'Waste Generator' status form."
+                title: "Gather required documents",
+                description: "Collect any documents or information mentioned in the notice."
             },
             {
-                title: "Schedule Staff Training",
-                description: "Conduct a 90-minute briefing session with housekeeping staff regarding the new segregation protocols to avoid penalties."
+                title: "Take appropriate action",
+                description: "Follow the instructions provided and respond within the specified timeframe if required."
             }
         ],
         applicableSchemes: {
-            title: "Swachh Bharat Mission-Urban 2.0",
-            description: "Based on this notice, you may now be eligible for the following government schemes. Tap here for more info.",
-            incentive: {
-                title: "Green Enterprise Incentive",
-                description: "Tax benefits for businesses that achieve 100% waste recycling status for 3 consecutive months."
-            }
+            title: resultData.scheme_suggestions && resultData.scheme_suggestions.length > 0
+                ? resultData.scheme_suggestions[0].name
+                : "Government Schemes",
+            description: "Based on this notice, you may be eligible for the following government schemes.",
+            incentive: resultData.scheme_suggestions && resultData.scheme_suggestions.length > 0
+                ? {
+                    title: resultData.scheme_suggestions[0].name,
+                    description: resultData.scheme_suggestions[0].description || "Government assistance program"
+                }
+                : {
+                    title: "No specific schemes identified",
+                    description: "Please check the schemes directory for applicable programs."
+                }
         }
     };
+
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
