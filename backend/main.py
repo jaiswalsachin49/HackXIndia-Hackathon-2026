@@ -41,11 +41,13 @@ app.add_middleware(
 )
 
 from api.v1.routes import documents
+from api.v1.routes import translate
 
 # Include routers
 app.include_router(api_router)
 app.include_router(auth.router)
 app.include_router(documents.router)
+app.include_router(translate.router)
 
 # Mount uploads directory
 os.makedirs("uploads", exist_ok=True)
