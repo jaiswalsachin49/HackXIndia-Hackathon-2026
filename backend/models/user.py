@@ -9,6 +9,7 @@ class UserBase(BaseModel):
     dob: Optional[str] = None
     gender: Optional[str] = None
     address: Optional[str] = None
+    profile_photo_url: Optional[str] = None
 
 class UserCreate(UserBase):
     password: str
@@ -19,6 +20,7 @@ class UserUpdate(BaseModel):
     dob: Optional[str] = None
     gender: Optional[str] = None
     address: Optional[str] = None
+    profile_photo_url: Optional[str] = None
 
 class UserInDB(UserBase):
     id: str

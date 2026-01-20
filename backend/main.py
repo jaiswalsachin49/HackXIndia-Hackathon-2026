@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from api.v1.router import api_router
 from api import auth
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
+import os
 
 from contextlib import asynccontextmanager
 from core.database import db
@@ -44,6 +46,10 @@ from api.v1.routes import documents
 app.include_router(api_router)
 app.include_router(auth.router)
 app.include_router(documents.router)
+
+# Mount uploads directory
+os.makedirs("uploads", exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 @app.get("/")
 def root():

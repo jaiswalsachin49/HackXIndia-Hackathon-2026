@@ -70,3 +70,48 @@ async def upload_notice(file: UploadFile = File(...)):
             detail="An error occurred while processing the notice. Please try again."
         )
 
+import shutil
+import os
+import uuid
+
+@router.post("/upload-profile-photo")
+async def upload_profile_photo(file: UploadFile = File(...)):
+    """
+    Upload a profile photo and return the URL.
+    """
+    try:
+        # Validate file type
+        allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
+        if file.content_type not in allowed_types:
+            raise HTTPException(
+                status_code=400, 
+                detail="Invalid file type. Please upload JPG or PNG."
+            )
+        
+        # Create uploads directory if it doesn't exist (handled in main.py too but good practice)
+        os.makedirs("uploads/profiles", exist_ok=True)
+        
+        # Generator unique filename
+        file_extension = file.filename.split(".")[-1]
+        filename = f"{uuid.uuid4()}.{file_extension}"
+        file_path = f"uploads/profiles/{filename}"
+        
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        # Return URL (assuming served locally)
+        # Construct full URL or relative URL depending on frontend needs. 
+        # Relative is safer for now.
+        return {
+            "url": f"/uploads/profiles/{filename}"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error uploading profile photo: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="An error occurred while uploading the photo."
+        )
+
