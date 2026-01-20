@@ -25,6 +25,27 @@ export default function ResultsPage() {
 
         if (storedData) {
             const data = JSON.parse(storedData);
+
+            // CRITICAL: Clean up explanation data to ensure it's properly formatted
+            // This handles both old data formats and ensures objects are never rendered
+            if (data.explanation && typeof data.explanation === 'object') {
+                // If explanation has english/hinglish fields that are objects, convert them to strings
+                if (data.explanation.english && typeof data.explanation.english === 'object') {
+                    data.explanation.english = JSON.stringify(data.explanation.english, null, 2);
+                }
+                if (data.explanation.hinglish && typeof data.explanation.hinglish === 'object') {
+                    data.explanation.hinglish = JSON.stringify(data.explanation.hinglish, null, 2);
+                }
+                // If explanation itself is a complex object (old format), convert to string
+                if (!data.explanation.english && !data.explanation.hinglish) {
+                    const explanationStr = JSON.stringify(data.explanation, null, 2);
+                    data.explanation = {
+                        english: explanationStr,
+                        hinglish: explanationStr
+                    };
+                }
+            }
+
             setResultData({
                 ...data,
                 fileName: fileName || 'Uploaded Document'
@@ -72,6 +93,59 @@ export default function ResultsPage() {
         );
     }
 
+    // Check for invalid document (Resume/Personal)
+    if (resultData?.explanation?.is_notice === false) {
+        return (
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+                <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center border border-slate-100">
+                    <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        </svg>
+                    </div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-2">Document Not Recognized</h2>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                        {(() => {
+                            let errorMsg = resultData.explanation.english || "This does not appear to be a valid government notice.";
+
+                            // If it's a JSON string, parse it and extract readable parts
+                            if (typeof errorMsg === 'string' && errorMsg.includes('{')) {
+                                try {
+                                    const parsed = JSON.parse(errorMsg);
+                                    if (parsed.Explanation) {
+                                        return parsed.Explanation;
+                                    }
+                                } catch (e) {
+                                    // If parsing fails, use the string as-is
+                                }
+                            }
+
+                            return errorMsg;
+                        })()}
+                    </p>
+                    <div className="bg-slate-50 p-4 rounded-lg mb-6 text-left">
+                        <h3 className="font-semibold text-slate-900 mb-2 text-sm">Why was this rejected?</h3>
+                        <ul className="text-slate-600 text-sm space-y-1 list-disc list-inside">
+                            <li>Document appears to be a resume or CV</li>
+                            <li>Contains personal/professional details, not official notices</li>
+                            <li>No government or legal notice content detected</li>
+                        </ul>
+                    </div>
+                    <div className="p-4 bg-amber-50 rounded-lg text-amber-800 text-sm mb-6 text-left">
+                        <strong>Note:</strong> CivicSense AI is designed specifically for government and legal notices. Resumes, personal photos, or homework code assignments are not supported.
+                    </div>
+                    <button
+                        onClick={() => router.push('/upload')}
+                        className="w-full py-3 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-colors font-medium"
+                    >
+                        Upload Another Document
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+
     // Helper to format explanation content
     const formatContent = (content) => {
         if (!content) return "No explanation available.";
@@ -80,8 +154,15 @@ export default function ResultsPage() {
         // Handle object content (from Groq JSON)
         return Object.entries(content)
             .map(([key, value]) => {
-                // Ensure value is a string or join array
-                const val = Array.isArray(value) ? value.join('\n- ') : value;
+                // Ensure value is safely converted to string
+                let val = value;
+                if (Array.isArray(value)) {
+                    val = value.map(v => typeof v === 'object' ? JSON.stringify(v) : String(v)).join('\n- ');
+                } else if (typeof value === 'object' && value !== null) {
+                    val = JSON.stringify(value, null, 2);
+                } else {
+                    val = String(value || '');
+                }
                 return `**${key}:**\n${val}`;
             })
             .join('\n\n');
@@ -101,10 +182,10 @@ export default function ResultsPage() {
         deadline: "",
         compliance: "ANALYZED",
         daysToRespond: "",
-        hinglishSummary: formatContent(rawHinglish),
-        englishSummary: rawEnglish
+        hinglishSummary: String(formatContent(rawHinglish) || "No explanation available"),
+        englishSummary: String(rawEnglish
             ? formatContent(rawEnglish)
-            : "This is a government notice. Please review carefully and take appropriate action.",
+            : "This is a government notice. Please review carefully and take appropriate action."),
         whoIsAffected: [
             { icon: "👤", label: "All Citizens" }
         ],
@@ -233,9 +314,83 @@ export default function ResultsPage() {
                                     Switch to {language === 'english' ? 'Hinglish' : 'English'}
                                 </button>
                             </div>
-                            <p className="text-slate-700 leading-relaxed text-base whitespace-pre-line">
-                                {language === 'english' ? mockData.englishSummary : mockData.hinglishSummary}
-                            </p>
+                            <div className="space-y-6">
+                                {(() => {
+                                    const content = language === 'english' ? mockData.englishSummary : mockData.hinglishSummary;
+
+                                    // Parse content
+                                    let sections = {};
+                                    if (typeof content === 'string') {
+                                        const parts = content.split('\n\n');
+                                        parts.forEach(part => {
+                                            const [titleLine, ...bodyLines] = part.split(':\n');
+                                            if (titleLine && bodyLines.length) {
+                                                const title = titleLine.replace(/\*\*/g, '').trim();
+                                                sections[title] = bodyLines.join('\n');
+                                            }
+                                        });
+                                    } else if (typeof content === 'object' && content !== null) {
+                                        sections = content;
+                                    }
+
+                                    // Helper for sections
+                                    const renderSection = (title, icon, colorClass, bgClass) => {
+                                        // Case-insensitive key lookup
+                                        const key = Object.keys(sections).find(k => k.toLowerCase() === title.toLowerCase()) || title;
+                                        let text = sections[key];
+
+                                        if (!text) return null;
+
+                                        // Ensure text is renderable - convert objects to JSON string
+                                        if (typeof text === 'object' && !Array.isArray(text)) {
+                                            text = JSON.stringify(text, null, 2);
+                                        }
+
+                                        // Convert array to list if needed
+                                        const displayContent = Array.isArray(text)
+                                            ? <ul className="list-disc pl-5 mt-2 space-y-1">{text.map((item, i) => <li key={i}>{String(item)}</li>)}</ul>
+                                            : String(text);
+
+                                        return (
+                                            <div className={`p-4 rounded-lg border ${bgClass} ${colorClass.replace('text-', 'border-').replace('700', '200')}`}>
+                                                <h4 className={`text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2 ${colorClass}`}>
+                                                    {icon}
+                                                    {title}
+                                                </h4>
+                                                <div className="text-slate-700 text-sm leading-relaxed whitespace-pre-line pl-6">
+                                                    {displayContent}
+                                                </div>
+                                            </div>
+                                        );
+                                    };
+
+                                    // If we failed to parse or content is simple string
+                                    if (Object.keys(sections).length === 0) {
+                                        const safeContent = typeof content === 'object' ? JSON.stringify(content, null, 2) : String(content);
+                                        return <p className="text-slate-700 leading-relaxed text-base whitespace-pre-line">{safeContent}</p>;
+                                    }
+
+                                    return (
+                                        <div className="grid gap-4">
+                                            {renderSection("Explanation",
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>,
+                                                "text-blue-700", "bg-blue-50")}
+
+                                            {renderSection("Reason",
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" /></svg>,
+                                                "text-amber-700", "bg-amber-50")}
+
+                                            {renderSection("Next Steps",
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 0 1 1.04-.208Z" clipRule="evenodd" /></svg>,
+                                                "text-green-700", "bg-green-50")}
+
+                                            {renderSection("Important Deadlines",
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" /></svg>,
+                                                "text-red-700", "bg-red-50")}
+                                        </div>
+                                    );
+                                })()}
+                            </div>
                         </div>
 
                         {/* Who is Affected & Implications */}

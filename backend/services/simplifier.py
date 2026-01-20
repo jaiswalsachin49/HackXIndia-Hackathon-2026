@@ -14,29 +14,26 @@ Notice Text:
 Notice Type: {notice_type}
 Severity: {severity}
 
-Please provide:
-1. A simple Hinglish (Hindi + English mix) explanation of what this notice means
-2. Why the person received this notice
-3. Clear, actionable next steps they should take
-4. Any important deadlines or consequences
+Please analyze the text strictly.
 
-Keep the tone friendly and reassuring. Use common Hinglish words that everyday people understand.
-Make it concise (3-4 sentences for explanation, bullet points for next steps).
+CRITICAL INSTRUCTION: FIRST, VALIDATE IF THIS IS A GOVERNMENT/LEGAL NOTICE.
+If the text is a Resume, CV, Personal Photo, Homework, or clearly NOT a government notice:
+Return "is_notice": false, and set "english" and "hinglish" values explaining that this is not a valid notice.
 
-Format your response like this:
-**Explanation (Hinglish mein):**
-[Your explanation here]
+If it IS a valid notice, set "is_notice": true and provide the following:
+1. A simple Hinglish explanation
+2. Reason for receiving
+3. Next steps
+4. Deadlines
 
-**Aapko yeh notice kyun mila:**
-[Reason here]
+Format your response as a JSON object with these keys:
+- "is_notice": boolean
+- "english": object with keys "Explanation", "Reason", "Next Steps", "Important Deadlines"
+- "hinglish": object with keys "Explanation", "Reason", "Next Steps", "Important Deadlines"
 
-**Next Steps (Kya karna hai):**
-- [Step 1]
-- [Step 2]
-- [Step 3]
-
-**Important Deadlines:**
-[Any deadlines or "No immediate deadline" if none]
+For INVALID documents (is_notice: false):
+- "english": "This appears to be a [Document Type], which is not a processed government notice. Please upload a valid government or legal notice."
+- "hinglish": "Yeh ek [Document Type] lag raha hai, jo ki sarkari notice nahi hai. Kripya sahi notice upload karein."
 """
 
     import json
