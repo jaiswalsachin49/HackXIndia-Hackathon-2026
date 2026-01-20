@@ -14,10 +14,10 @@ export default function Footer() {
                 </Link>
 
                 <nav className="flex items-center gap-8 text-sm text-slate-500">
-                    <Link href="/privacy" className="hover:text-slate-900">Privacy Policy</Link>
-                    <Link href="/terms" className="hover:text-slate-900">Terms of Service</Link>
-                    <Link href="/accessibility" className="hover:text-slate-900">Accessibility</Link>
-                    <Link href="/contact" className="hover:text-slate-900">Contact Us</Link>
+                    <Link href="/#" className="hover:text-slate-900">Privacy Policy</Link>
+                    <Link href="/#" className="hover:text-slate-900">Terms of Service</Link>
+                    <Link href="/#" className="hover:text-slate-900">Accessibility</Link>
+                    <Link href="/help" className="hover:text-slate-900">Contact Us</Link>
                 </nav>
 
                 <div className="text-xs text-slate-400">

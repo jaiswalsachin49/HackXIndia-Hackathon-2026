@@ -71,32 +71,35 @@ export default function UploadPage() {
             </div>
 
             {/* Upload Area */}
-            <div className="mb-10">
+            <div className="mb-6">
               <Dropzone onFileSelect={setFile} file={file} />
+            </div>
+
+            {/* Submit Button (Moved) */}
+            <div className="mb-10 flex justify-center">
+              <button
+                onClick={handleUpload}
+                disabled={!file || loading}
+                className={`w-full md:w-auto flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wide px-8 py-4 rounded-xl transition-all shadow-sm ${file && !loading
+                  ? "bg-slate-900 text-white hover:bg-slate-800 hover:shadow-lg hover:-translate-y-0.5"
+                  : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                  }`}
+              >
+                {loading ? "Processing..." : "Submit Document"}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </button>
             </div>
 
             {/* Info Section */}
             <InfoSection />
 
             {/* Actions */}
-            <div className="flex justify-between items-center mt-12 pt-6 border-t border-slate-100">
+            <div className="flex justify-center mt-12 pt-6 border-t border-slate-100">
               <Link href="/" className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors border-b border-transparent hover:border-slate-800 pb-0.5">
                 Cancel Upload
               </Link>
-
-              <button
-                onClick={handleUpload}
-                disabled={!file || loading}
-                className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide px-6 py-3 rounded transition-colors ${file && !loading
-                  ? "bg-[#E2E8F0] text-slate-800 hover:bg-slate-300"
-                  : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                  }`}
-              >
-                {loading ? "Processing..." : "Submit Document"}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-              </button>
             </div>
 
           </div>
