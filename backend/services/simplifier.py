@@ -23,13 +23,17 @@ Return "is_notice": false, and set "english" and "hinglish" values explaining th
 If it IS a valid notice, set "is_notice": true and provide the following:
 1. A simple Hinglish explanation
 2. Reason for receiving
-3. Next steps
+3. Next steps (as a list)
 4. Deadlines
+5. Who is affected (e.g. "All Citizens", "Business Owners")
+6. Issuing Authority (e.g. "Income Tax Dept", "Traffic Police")
+7. Notice Number (if available, else "N/A")
+8. Title (A short, specific title based on the document's ACTUAL content, e.g. "Payment of Property Tax", "Summons for hearing", NOT "Income Tax Notice")
 
 Format your response as a JSON object with these keys:
 - "is_notice": boolean
-- "english": object with keys "Explanation", "Reason", "Next Steps", "Important Deadlines"
-- "hinglish": object with keys "Explanation", "Reason", "Next Steps", "Important Deadlines"
+- "english": object with keys "Title", "Explanation", "Reason", "Next Steps", "Important Deadlines", "Who is affected", "Issuing Authority", "Notice Number"
+- "hinglish": object with keys "Title", "Explanation", "Reason", "Next Steps", "Important Deadlines", "Who is affected", "Issuing Authority", "Notice Number"
 
 For INVALID documents (is_notice: false):
 - "english": "This appears to be a [Document Type], which is not a processed government notice. Please upload a valid government or legal notice."
@@ -119,7 +123,7 @@ def _simplify_with_groq(prompt: str) -> str:
             model="llama-3.3-70b-versatile",  # Current supported model
             messages=[
                 {"role": "system", "content": "You are a helpful assistant. You must provide your response in valid JSON format with two keys: 'english' and 'hinglish'."},
-                {"role": "user", "content": prompt + "\n\nProvide the response as a JSON object with 'english' and 'hinglish' fields containing the respective explanations."}
+                {"role": "user", "content": prompt + "\n\nProvide the response as a JSON object with 'english' and 'hinglish' fields. Ensure all sub-fields (Title, Explanation, Reason, Next Steps, Important Deadlines, Who is affected, Issuing Authority, Notice Number) are present."}
             ],
             temperature=0.3,
             max_tokens=1000,
