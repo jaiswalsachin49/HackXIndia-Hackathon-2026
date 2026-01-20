@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, ChevronUp, Mail, Send, CheckCircle, XCircle } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Toast from "../../components/Toast";
 
 const FAQs = [
     {
@@ -129,6 +130,7 @@ export default function Help() {
     const [loading, setLoading] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [submittedEmail, setSubmittedEmail] = useState("");
+    const [toast, setToast] = useState({ message: '', type: 'info' });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -137,9 +139,8 @@ export default function Help() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Basic frontend validation
         if (!formData.name || !formData.email || !formData.description) {
-            alert("Please fill in all fields.");
+            setToast({ message: "Please fill in all fields.", type: "error" });
             return;
         }
 
@@ -172,12 +173,12 @@ export default function Help() {
                 setFormData({ name: "", email: "", description: "" });
             } else {
                 console.error("Web3Forms Error:", result);
-                alert("Failed to send message: " + (result.message || "Unknown error"));
+                setToast({ message: "Failed to send message: " + (result.message || "Unknown error"), type: "error" });
             }
 
         } catch (error) {
             console.error("Error sending contact form:", error);
-            alert("An error occurred. Please try again later.");
+            setToast({ message: "An error occurred. Please try again later.", type: "error" });
         } finally {
             setLoading(false);
         }
@@ -313,6 +314,11 @@ export default function Help() {
                 isOpen={showSuccess}
                 onClose={() => setShowSuccess(false)}
                 email={submittedEmail}
+            />
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast({ ...toast, message: '' })}
             />
         </div>
     );
