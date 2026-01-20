@@ -52,15 +52,9 @@ export default function Home() {
       <Header />
 
       <div className="bg-[#1c2e36] text-white text-xs py-2 px-6 flex justify-between items-center tracking-wide">
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <span className="bg-[#2F5233] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Latest</span>
           <span className="opacity-90 max-w-md truncate hidden sm:block">Digital Personal Data Protection Act summary now in Hindi</span>
-        </div>
-        <div className="flex gap-6 opacity-70">
-          <span>About</span>
-          <span>Schemes</span>
-          <span>Help</span>
-          <span className="flex items-center gap-1"><span className="text-[10px]">文A</span> Hinglish</span>
         </div>
       </div>
 
