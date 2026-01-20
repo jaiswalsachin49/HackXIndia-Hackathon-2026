@@ -37,7 +37,28 @@ export default function Header() {
                 <div className="flex items-center gap-8">
                     <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
                         <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
-                        <Link href="/upload" className="hover:text-slate-900 transition-colors">Upload</Link>
+
+                        {/* Upload Dropdown */}
+                        <div className="relative group">
+                            <button className="flex items-center gap-1 hover:text-slate-900 transition-colors">
+                                Uploads
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                            {/* Dropdown Menu */}
+                            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-left z-50">
+                                <Link href="/upload" className="block px-4 py-3 text-sm text-slate-600 hover:text-[#2F5233] hover:bg-slate-50 rounded-t-xl transition-colors">
+                                    <div className="font-medium">Add New</div>
+                                    <div className="text-xs text-slate-400 mt-0.5">Upload a new document</div>
+                                </Link>
+                                <div className="h-px bg-slate-50"></div>
+                                <Link href="/history" className="block px-4 py-3 text-sm text-slate-600 hover:text-[#2F5233] hover:bg-slate-50 rounded-b-xl transition-colors">
+                                    <div className="font-medium">History</div>
+                                    <div className="text-xs text-slate-400 mt-0.5">View passed analysis</div>
+                                </Link>
+                            </div>
+                        </div>
                         <Link href="/schemes" className="hover:text-slate-900 transition-colors">Schemes</Link>
                         <Link href="/about" className="hover:text-slate-900 transition-colors">About</Link>
                         <Link href="/help" className="hover:text-slate-900 transition-colors">Help</Link>

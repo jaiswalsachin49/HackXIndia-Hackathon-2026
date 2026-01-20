@@ -76,6 +76,12 @@ export default function Profile() {
         setError("");
         setSuccess("");
 
+        if (mobile && (!/^\d+$/.test(mobile) || mobile.length !== 10)) {
+            setError("Phone number must be exactly 10 digits and contain only numbers");
+            setSaving(false);
+            return;
+        }
+
         const token = localStorage.getItem("cs_token");
         try {
             const response = await fetch("http://localhost:8000/api/v1/auth/profile", {
