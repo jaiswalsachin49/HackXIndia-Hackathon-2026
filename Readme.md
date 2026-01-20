@@ -37,11 +37,11 @@ Every day, millions of citizens struggle to understand government notices, circu
 ---
 
 ### 🛠️ Tech Stack
-- **Frontend**: Next.js (React), Tailwind CSS, Framer Motion, Lucide React
-- **Backend**: FastAPI (Python), Uvicorn
+- **Frontend**: Next.js , Tailwind CSS, Framer Motion, Lucide React
+- **Backend**: FastAPI , Uvicorn
 - **AI/ML**: Groq API (LLaMA 3) for text analysis and summarization
-- **Database**: MongoDB / PostgreSQL (Supabase)
-- **Deployment**: Vercel (Frontend), Railway/Render (Backend)
+- **Database**: MongoDB
+- **Deployment**: Vercel (Frontend), Render (Backend)
 
 ---
 
