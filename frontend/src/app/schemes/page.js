@@ -1,16 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import FilterSidebar from "../../components/schemes/FilterSidebar";
 import EligibilityForm from "../../components/schemes/EligibilityForm";
 import SchemeCard from "../../components/schemes/SchemeCard";
+import LoginRequiredModal from "../../components/LoginRequiredModal";
 
 export default function SchemesPage() {
   const [results, setResults] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
+
+  useEffect(() => {
+    const token = localStorage.getItem("cs_token");
+    if (!token) {
+      setShowLoginModal(true);
+    }
+  }, []);
 
   const handleCheck = async (formData) => {
     setSearched(true);
@@ -116,6 +125,7 @@ export default function SchemesPage() {
       </div>
 
       <Footer />
+      <LoginRequiredModal isOpen={showLoginModal} onClose={() => { }} />
     </div>
   );
 }
