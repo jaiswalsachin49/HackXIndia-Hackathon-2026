@@ -103,7 +103,9 @@ export default function ResultsPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
                         </svg>
                     </div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-2">Document Not Recognized</h2>
+                    <h2 className="text-xl font-bold text-slate-900 mb-2">
+                        {resultData.notice_type === "No_Text_Detected" ? "Unreadable Image detected" : "Document Not Recognized"}
+                    </h2>
                     <p className="text-slate-600 mb-4 leading-relaxed">
                         {(() => {
                             let errorMsg = resultData.explanation.english || "This does not appear to be a valid government notice.";
@@ -126,9 +128,19 @@ export default function ResultsPage() {
                     <div className="bg-slate-50 p-4 rounded-lg mb-6 text-left">
                         <h3 className="font-semibold text-slate-900 mb-2 text-sm">Why was this rejected?</h3>
                         <ul className="text-slate-600 text-sm space-y-1 list-disc list-inside">
-                            <li>Document appears to be a resume or CV</li>
-                            <li>Contains personal/professional details, not official notices</li>
-                            <li>No government or legal notice content detected</li>
+                            {resultData.notice_type === "No_Text_Detected" ? (
+                                <>
+                                    <li>Image contains no readable text</li>
+                                    <li>Might be a photo of an object or scene</li>
+                                    <li>Image quality is too blurry or dark</li>
+                                </>
+                            ) : (
+                                <>
+                                    <li>Document appears to be a resume or CV</li>
+                                    <li>Contains personal/professional details, not official notices</li>
+                                    <li>No government or legal notice content detected</li>
+                                </>
+                            )}
                         </ul>
                     </div>
                     <div className="p-4 bg-amber-50 rounded-lg text-amber-800 text-sm mb-6 text-left">
@@ -241,6 +253,42 @@ export default function ResultsPage() {
                         </button>
 
                         <div className="flex gap-3">
+                            <button
+                                onClick={async () => {
+                                    if (!resultData) return;
+                                    try {
+                                        const token = localStorage.getItem("cs_token");
+                                        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/documents/save`, {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "Authorization": `Bearer ${token}`
+                                            },
+                                            body: JSON.stringify({
+                                                filename: resultData.fileName,
+                                                notice_type: resultData.notice_type,
+                                                severity: resultData.severity,
+                                                explanation: resultData.explanation
+                                            })
+                                        });
+
+                                        if (response.ok) {
+                                            alert("Analysis saved successfully!");
+                                        } else {
+                                            alert("Failed to save analysis.");
+                                        }
+                                    } catch (error) {
+                                        console.error("Save error:", error);
+                                        alert("An error occurred while saving.");
+                                    }
+                                }}
+                                className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wide bg-slate-900 text-white rounded hover:bg-slate-800"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                                </svg>
+                                Save Analysis
+                            </button>
                             <button onClick={handlePrint} className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wide border border-slate-300 rounded hover:bg-slate-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />

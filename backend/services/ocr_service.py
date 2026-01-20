@@ -45,11 +45,28 @@ def _extract_from_image(file) -> str:
         if image.mode not in ('L', 'RGB'):
             image = image.convert('RGB')
         
-        # Extract text using Tesseract
+        # Extract text using Tesseract (Attempt 1: Default)
         text = pytesseract.image_to_string(image, lang='eng')
         
+        # Attempt 2: PSM 6 (Assume a single uniform block of text)
+        if not text.strip():
+            logger.info("Default OCR yielded no text, retrying with PSM 6...")
+            text = pytesseract.image_to_string(image, lang='eng', config='--psm 6')
+
+        # Attempt 3: Pre-processing (Grayscale + Thresholding)
+        if not text.strip():
+            logger.info("OCR still empty, applying image preprocessing...")
+            try:
+                # Convert to grayscale
+                gray = image.convert('L')
+                # Binarize (Thresholding)
+                binary = gray.point(lambda p: 255 if p > 128 else 0)
+                text = pytesseract.image_to_string(binary, lang='eng')
+            except Exception as preprocess_error:
+                logger.warning(f"Preprocessing failed: {preprocess_error}")
+
         extracted_text = text.strip()
-        logger.info(f"OCR extracted {len(extracted_text)} characters from image")
+        logger.info(f"OCR extracted {len(extracted_text)} characters from image (Size: {image.size}, Mode: {image.mode})")
         
         return extracted_text
         

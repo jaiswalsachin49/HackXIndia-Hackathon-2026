@@ -31,12 +31,19 @@ async def upload_notice(file: UploadFile = File(...)):
         logger.info(f"Extracted text length: {len(text)} characters")
         
         # More lenient validation - allow shorter text for demo
+        # More lenient validation - allow shorter text for demo
         if not text or len(text.strip()) < 5:
-            logger.warning(f"Insufficient text extracted: '{text[:100]}'")
-            raise HTTPException(
-                status_code=400,
-                detail=f"Could not extract sufficient text ({len(text)} characters). Please ensure the image/PDF contains readable text and is clear."
-            )
+            logger.warning(f"Insufficient text extracted: '{text[:100] if text else ''}'")
+            return {
+                "notice_type": "No_Text_Detected",
+                "severity": "Rejected",
+                "explanation": {
+                    "english": "We could not detect any text in this image. It appears to be a picture of an object, scene, or a very blurry document.",
+                    "hinglish": "Is tasveer mein koi text nahi mila. Yeh kisi object ya scene ki photo lag rahi hai.",
+                    "is_notice": False
+                },
+                "scheme_suggestions": []
+            }
         
         logger.debug(f"Extracted text preview: {text[:100]}...")
         
