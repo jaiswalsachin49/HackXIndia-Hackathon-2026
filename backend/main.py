@@ -38,9 +38,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from api.v1.routes import documents
+
 # Include routers
 app.include_router(api_router)
 app.include_router(auth.router)
+app.include_router(documents.router)
 
 @app.get("/")
 def root():
