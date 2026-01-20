@@ -1,0 +1,18 @@
+[
+    {
+        "name": "PM Kisan Samman Nidhi",
+        "description": "Financial support to farmer families.",
+        "max_income": 200000,
+        "age_min": 18,
+        "age_max": 60,
+        "state": "All"
+    },
+    {
+        "name": "Ayushman Bharat",
+        "description": "Health insurance for low income families.",
+        "max_income": 500000,
+        "age_min": 0,
+        "age_max": 100,
+        "state": "All"
+    }
+]
