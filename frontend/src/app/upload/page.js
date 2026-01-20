@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import Dropzone from "../../components/upload/Dropzone";
 import InfoSection from "../../components/upload/InfoSection";
 import LoginRequiredModal from "../../components/LoginRequiredModal";
+import Toast from "../../components/Toast";
 
 export default function UploadPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function UploadPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [toast, setToast] = useState({ message: '', type: 'info' });
 
   useEffect(() => {
     const token = localStorage.getItem("cs_token");
@@ -45,7 +47,7 @@ export default function UploadPage() {
 
     } catch (e) {
       console.error(e);
-      alert('Error processing your document. Please try again.');
+      setToast({ message: 'Error processing your document. Please try again.', type: 'error' });
       setLoading(false);
     }
   };
@@ -126,6 +128,11 @@ export default function UploadPage() {
 
       <Footer />
       <LoginRequiredModal isOpen={showLoginModal} onClose={() => { }} />
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ ...toast, message: '' })}
+      />
     </div>
   );
 }
