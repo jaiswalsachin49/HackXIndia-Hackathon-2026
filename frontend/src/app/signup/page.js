@@ -15,6 +15,7 @@ export default function Signup() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ export default function Signup() {
 
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/auth/signup", {
+            const response = await fetch(`${API_BASE}/api/v1/auth/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
