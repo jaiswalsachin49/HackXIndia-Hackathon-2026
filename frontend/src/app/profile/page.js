@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 
 export default function Profile() {
     const router = useRouter();
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
     const [activeTab, setActiveTab] = useState("profile");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -37,7 +38,7 @@ export default function Profile() {
             }
 
             try {
-                const response = await fetch("http://localhost:8000/api/v1/auth/me", {
+                const response = await fetch(`${API_BASE}/api/v1/auth/me`, {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
@@ -86,7 +87,7 @@ export default function Profile() {
 
         const token = localStorage.getItem("cs_token");
         try {
-            const response = await fetch("http://localhost:8000/api/v1/auth/profile", {
+            const response = await fetch(`${API_BASE}/api/v1/auth/profile`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -128,7 +129,7 @@ export default function Profile() {
 
         try {
             setSaving(true);
-            const response = await fetch("http://localhost:8000/api/v1/upload-profile-photo", {
+            const response = await fetch(`${API_BASE}/api/v1/upload-profile-photo`, {
                 method: "POST",
                 body: formData,
             });
@@ -141,7 +142,7 @@ export default function Profile() {
 
             // Immediately update profile with new photo URL
             const token = localStorage.getItem("cs_token");
-            await fetch("http://localhost:8000/api/v1/auth/profile", {
+            await fetch(`${API_BASE}/api/v1/auth/profile`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -176,7 +177,7 @@ export default function Profile() {
         setPasswordSaving(true);
         const token = localStorage.getItem("cs_token");
         try {
-            const response = await fetch("http://localhost:8000/api/v1/auth/password", {
+            const response = await fetch(`${API_BASE}/api/v1/auth/password`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -288,7 +289,7 @@ export default function Profile() {
                                                 <div className="w-24 h-24 rounded-full bg-slate-100 ring-4 ring-white shadow-sm flex items-center justify-center text-slate-400 overflow-hidden">
                                                     {photoUrl ? (
                                                         <img
-                                                            src={photoUrl.startsWith("http") ? photoUrl : `http://localhost:8000${photoUrl}`}
+                                                            src={photoUrl.startsWith("http") ? photoUrl : `${API_BASE}${photoUrl}`}
                                                             alt="Profile"
                                                             className="w-full h-full object-cover"
                                                         />

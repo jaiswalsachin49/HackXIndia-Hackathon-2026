@@ -10,6 +10,7 @@ import SchemeCard from "../../components/schemes/SchemeCard";
 import LoginRequiredModal from "../../components/LoginRequiredModal";
 
 export default function SchemesPage() {
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
   const [results, setResults] = useState([]);
   const [searched, setSearched] = useState(false);
   const [sortBy, setSortBy] = useState("Relevance");
@@ -83,7 +84,6 @@ export default function SchemesPage() {
     setError(null);
 
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
       const response = await fetch(`${API_BASE}/api/v1/find-schemes`, {
         method: "POST",
         headers: {
