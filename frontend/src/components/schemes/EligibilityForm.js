@@ -132,7 +132,7 @@ export default function EligibilityForm({ onCheck }) {
 
                     <button
                         onClick={() => onCheck(form)}
-                        className="bg-[#008000] text-white px-8 py-3 rounded text-sm font-bold uppercase tracking-wide hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap h-[46px]"
+                        className="bg-[#3D5A3C] text-white px-8 py-3 rounded-lg text-sm font-bold uppercase tracking-wide hover:bg-[#2F4C2E] transition-colors shadow-lg whitespace-nowrap h-[46px]"
                     >
                         Check Eligibility
                     </button>

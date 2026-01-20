@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, ChevronUp, Mail, Send, CheckCircle, XCircle } from "lucide-react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -34,12 +34,7 @@ const AccordionItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="border-b border-slate-200 last:border-0"
-        >
+        <div className="border-b border-slate-200 last:border-0">
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
@@ -51,22 +46,14 @@ const AccordionItem = ({ question, answer }) => {
                     {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                 </span>
             </button>
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                    >
-                        <p className="pb-6 text-slate-600 leading-relaxed pr-8">
-                            {answer}
-                        </p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.div>
+            <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+            >
+                <p className="pb-6 text-slate-600 leading-relaxed pr-8">
+                    {answer}
+                </p>
+            </div>
+        </div>
     );
 };
 
@@ -108,52 +95,28 @@ const SuccessModal = ({ isOpen, onClose, email }) => (
 );
 
 const MilestoneBar = () => {
-    const { scrollYProgress } = useScroll();
-
     return (
         <div className="fixed left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-12 z-50">
             {/* Connecting Line */}
             <div className="absolute left-[7px] top-0 bottom-0 w-[2px] bg-slate-100">
-                <motion.div
-                    className="w-full bg-[#2F5233] origin-top"
-                    style={{ scaleY: scrollYProgress }}
-                />
+                <div className="w-full bg-[#2F5233] h-full opacity-20" />
             </div>
 
             {/* Milestones */}
             <div className="relative z-10 flex flex-col gap-32">
                 {[0, 1, 2].map((i) => (
-                    <MilestoneDot key={i} index={i} scrollYProgress={scrollYProgress} />
+                    <MilestoneDot key={i} />
                 ))}
             </div>
         </div>
     );
 };
 
-const MilestoneDot = ({ index, scrollYProgress }) => {
-    // Calculate if this section is active based on scroll progress
-    // Rough estimate: 0-0.3 (Hero), 0.3-0.6 (Contact), 0.6-1.0 (FAQ)
-    const threshold = index * 0.3;
-
+const MilestoneDot = () => {
     return (
-        <motion.div
-            className="w-4 h-4 rounded-full border-2 border-[#2F5233] bg-white flex items-center justify-center"
-            initial={false}
-        >
-            <motion.div
-                className="w-2 h-2 rounded-full bg-[#2F5233]"
-                animate={{
-                    opacity: [0.5, 1, 0.5],
-                    scale: [0.8, 1.2, 0.8]
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.5
-                }}
-            />
-        </motion.div>
+        <div className="w-4 h-4 rounded-full border-2 border-[#2F5233] bg-white flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-[#2F5233]" />
+        </div>
     );
 };
 
@@ -228,12 +191,7 @@ export default function Help() {
             <main className="flex-grow pt-24 pb-24">
                 {/* 01. Intro Section */}
                 <section className="min-h-[60vh] flex items-center justify-between px-6 mb-24 lg:pl-32 max-w-7xl mx-auto w-full">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-2xl"
-                    >
+                    <div className="max-w-2xl">
                         <span className="text-[#2F5233] font-bold tracking-widest uppercase text-sm mb-4 block">
                             01 — Support Center
                         </span>
@@ -243,14 +201,9 @@ export default function Help() {
                         <p className="text-xl md:text-2xl text-slate-500 max-w-xl font-light leading-relaxed">
                             Navigate the complexities of government schemes with ease. We're your personal guide to civic empowerment.
                         </p>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="hidden lg:block relative w-[500px] h-[500px]"
-                    >
+                    <div className="hidden lg:block relative w-[500px] h-[500px]">
                         <div className="absolute inset-0 bg-gradient-to-tr from-[#2F5233]/5 to-transparent rounded-full blur-3xl" />
                         <Image
                             src="/images/civic_support_illustration.png"
@@ -259,17 +212,13 @@ export default function Help() {
                             className="object-contain drop-shadow-2xl"
                             priority
                         />
-                    </motion.div>
+                    </div>
                 </section>
 
                 {/* 02. Contact Section */}
                 <section id="contact" className="min-h-[80vh] flex items-center px-6 mb-24 lg:pl-32">
                     <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-20 items-start">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                        >
+                        <div>
                             <span className="text-[#2F5233] font-bold tracking-widest uppercase text-sm mb-4 block">
                                 02 — Get in Touch
                             </span>
@@ -279,13 +228,10 @@ export default function Help() {
                             <p className="text-slate-500 text-lg leading-relaxed mb-12">
                                 We value your feedback and queries. Our team usually responds within 24 hours.
                             </p>
-                        </motion.div>
+                        </div>
 
-                        <motion.form
+                        <form
                             onSubmit={handleSubmit}
-                            initial={{ opacity: 0, opacity: 0 }}
-                            whileInView={{ opacity: 1, opacity: 1 }}
-                            viewport={{ once: true }}
                             className="space-y-8"
                         >
                             <div className="group">
@@ -339,18 +285,13 @@ export default function Help() {
                                 {loading ? "Sending..." : "Send Message"}
                                 <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
-                        </motion.form>
+                        </form>
                     </div>
                 </section>
 
                 {/* 03. FAQ Section */}
                 <section className="min-h-[60vh] px-6 lg:pl-32 flex flex-col justify-center">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="max-w-4xl w-full"
-                    >
+                    <div className="max-w-4xl w-full">
                         <span className="text-[#2F5233] font-bold tracking-widest uppercase text-sm mb-4 block">
                             03 — Common Questions
                         </span>
@@ -363,7 +304,7 @@ export default function Help() {
                                 <AccordionItem key={index} question={faq.question} answer={faq.answer} />
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
                 </section>
             </main>
 
