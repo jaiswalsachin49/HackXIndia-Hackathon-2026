@@ -64,8 +64,8 @@ export default function SchemesPage() {
 
         <main className="flex-1 p-8 bg-white">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-serif font-bold text-slate-900 mb-2">Government Schemes Directory</h1>
-            <p className="text-slate-500 mb-8">Identify, verify, and apply for government initiatives tailored to your profile.</p>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-3">Government Schemes Directory</h1>
+            <p className="text-base md:text-lg text-slate-500 mb-10">Identify, verify, and apply for government initiatives tailored to your profile.</p>
 
             <EligibilityForm onCheck={handleCheck} />
 
@@ -80,7 +80,7 @@ export default function SchemesPage() {
             </div>
 
             <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-2">
-              <h2 className="text-xl font-serif font-bold text-slate-900">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900">
                 Eligible Schemes {searched && `(${results.length})`}
               </h2>
               <div className="flex items-center gap-2 text-sm text-slate-600">
