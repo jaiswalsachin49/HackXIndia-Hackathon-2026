@@ -1,182 +1,18 @@
 [
     {
         "name": "PM Kisan Samman Nidhi",
-        "description": "₹6000/year financial support to farmer families.",
+        "description": "Financial support to farmer families.",
         "max_income": 200000,
         "age_min": 18,
-        "age_max": 70,
-        "state": "All",
-        "category": "Farmer"
+        "age_max": 60,
+        "state": "All"
     },
     {
-        "name": "Ayushman Bharat (PMJAY)",
-        "description": "₹5 lakh health insurance for low income families.",
+        "name": "Ayushman Bharat",
+        "description": "Health insurance for low income families.",
         "max_income": 500000,
         "age_min": 0,
         "age_max": 100,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "PM Awas Yojana",
-        "description": "Housing for All - financial assistance for home construction.",
-        "max_income": 1800000,
-        "age_min": 18,
-        "age_max": 70,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "National Pension Scheme (APY)",
-        "description": "Old age income security for unorganized sector workers.",
-        "max_income": 999999999,
-        "age_min": 18,
-        "age_max": 40,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "PM Mudra Yojana",
-        "description": "Loans up to ₹10 lakh for small businesses.",
-        "max_income": 1000000,
-        "age_min": 18,
-        "age_max": 65,
-        "state": "All",
-        "category": "Business"
-    },
-    {
-        "name": "Sukanya Samriddhi Yojana",
-        "description": "Savings scheme for girl child education and marriage.",
-        "max_income": 999999999,
-        "age_min": 0,
-        "age_max": 10,
-        "state": "All",
-        "category": "Girl Child"
-    },
-    {
-        "name": "PM Scholarship Scheme",
-        "description": "Scholarship for children of ex-servicemen and police personnel.",
-        "max_income": 600000,
-        "age_min": 18,
-        "age_max": 25,
-        "state": "All",
-        "category": "Student"
-    },
-    {
-        "name": "Pradhan Mantri Fasal Bima Yojana",
-        "description": "Crop insurance for farmers against natural calamities.",
-        "max_income": 500000,
-        "age_min": 18,
-        "age_max": 70,
-        "state": "All",
-        "category": "Farmer"
-    },
-    {
-        "name": "Atal Pension Yojana",
-        "description": "Guaranteed pension between ₹1000-₹5000 after 60 years.",
-        "max_income": 999999999,
-        "age_min": 18,
-        "age_max": 40,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "PM Ujjwala Yojana",
-        "description": "Free LPG connection to women from BPL families.",
-        "max_income": 100000,
-        "age_min": 18,
-        "age_max": 100,
-        "state": "All",
-        "category": "BPL"
-    },
-    {
-        "name": "National Rural Livelihood Mission",
-        "description": "Self-employment and skill development for rural poor.",
-        "max_income": 100000,
-        "age_min": 18,
-        "age_max": 65,
-        "state": "All",
-        "category": "Rural"
-    },
-    {
-        "name": "PM Svanidhi Scheme",
-        "description": "₹10000 working capital loan for street vendors.",
-        "max_income": 300000,
-        "age_min": 18,
-        "age_max": 65,
-        "state": "All",
-        "category": "Vendor"
-    },
-    {
-        "name": "Pradhan Mantri Jan Dhan Yojana",
-        "description": "Free bank account with ₹10000 overdraft facility.",
-        "max_income": 999999999,
-        "age_min": 10,
-        "age_max": 100,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "Kisan Credit Card",
-        "description": "Affordable credit for farmers' agricultural needs.",
-        "max_income": 300000,
-        "age_min": 18,
-        "age_max": 70,
-        "state": "All",
-        "category": "Farmer"
-    },
-    {
-        "name": "PM Matru Vandana Yojana",
-        "description": "₹5000 cash benefit for pregnant and lactating mothers.",
-        "max_income": 250000,
-        "age_min": 18,
-        "age_max": 45,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "National Apprenticeship Promotion Scheme",
-        "description": "Stipend support for apprentices in industries.",
-        "max_income": 500000,
-        "age_min": 18,
-        "age_max": 30,
-        "state": "All",
-        "category": "Student"
-    },
-    {
-        "name": "PM Vishwakarma Scheme",
-        "description": "Support for artisans and craftspeople with training & credit.",
-        "max_income": 300000,
-        "age_min": 18,
-        "age_max": 65,
-        "state": "All",
-        "category": "Artisan"
-    },
-    {
-        "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
-        "description": "₹2 lakh life insurance at ₹436/year premium.",
-        "max_income": 999999999,
-        "age_min": 18,
-        "age_max": 50,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "PM Suraksha Bima Yojana",
-        "description": "₹2 lakh accident insurance at ₹12/year premium.",
-        "max_income": 999999999,
-        "age_min": 18,
-        "age_max": 70,
-        "state": "All",
-        "category": "General"
-    },
-    {
-        "name": "Post Matric Scholarship for SC/ST",
-        "description": "Financial assistance for SC/ST students pursuing higher education.",
-        "max_income": 250000,
-        "age_min": 16,
-        "age_max": 30,
-        "state": "All",
-        "category": "SC/ST"
+        "state": "All"
     }
 ]
