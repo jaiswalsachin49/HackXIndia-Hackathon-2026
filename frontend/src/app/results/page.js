@@ -1,0 +1,231 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+export default function ResultsPage() {
+    const router = useRouter();
+
+    // Mock data - will be replaced with actual API response
+    const mockData = {
+        documentType: "Administrative Document",
+        title: "Regulation on Urban Waste Management Updates",
+        issuingAuthority: "Ministry of Urban Affairs",
+        priority: "High Priority",
+        effectiveDate: "Nov 01, 2023",
+        deadline: "Dec 14, 2023",
+        compliance: "IN COMPLIANCE",
+        daysToRespond: "6 DAYS TO RESPOND",
+        hinglishSummary: "Yeh naya regulation urban areas mein waste management ke liye strict guidelines deta hai. Isme kaha gaya hai ki sabhi businesses ko apna waste segregate karna zaroori hai (wet aur dry waste alag-alag). Agar aapne compliance nahi kiya, toh heavy fines lag sakte hain.\n\nSarkar ka kehna hai ki yeh rules ajle mahine se lagu honge. Isliye sabhi ghar aur factories ko turant apne systems ko update karna padega. Jiska main maqsad shehron ko saaf rakhna aur landfill burden kam karna hai.",
+        whoIsAffected: [
+            { icon: "🏢", label: "Small Business Owners" },
+            { icon: "🏭", label: "Industrial Units" },
+            { icon: "🏘️", label: "Housing Societies (>50 units)" }
+        ],
+        implications: "The Ministry has observed that mixed waste disposal at municipal sites continues to violate capacity limits. This amendment shifts the responsibility of primary segregation to the waste generator. This mandate is applicable for the collection process. New compliance checks will begin randomly from December 1st.",
+        actionChecklist: [
+            {
+                title: "Audit current waste disposal system",
+                description: "Review how your establishment currently handles wet and dry waste. Ensure you have distinct color-coded bins (Green for Wet, Blue for Dry)."
+            },
+            {
+                title: "Register on Municipal Portal",
+                description: "Log in to your local municipal corporation website and update your 'Waste Generator' status form."
+            },
+            {
+                title: "Schedule Staff Training",
+                description: "Conduct a 90-minute briefing session with housekeeping staff regarding the new segregation protocols to avoid penalties."
+            }
+        ],
+        applicableSchemes: {
+            title: "Swachh Bharat Mission-Urban 2.0",
+            description: "Based on this notice, you may now be eligible for the following government schemes. Tap here for more info.",
+            incentive: {
+                title: "Green Enterprise Incentive",
+                description: "Tax benefits for businesses that achieve 100% waste recycling status for 3 consecutive months."
+            }
+        }
+    };
+
+    return (
+        <div className="flex flex-col min-h-screen bg-white">
+            <Header />
+
+            <main className="flex-grow">
+                {/* Action Bar */}
+                <div className="bg-[#FAFAFA] border-b border-slate-200 py-3 px-6">
+                    <div className="max-w-5xl mx-auto flex justify-between items-center">
+                        <button
+                            onClick={() => router.push('/upload')}
+                            className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                            </svg>
+                            Back to Dashboard
+                        </button>
+
+                        <div className="flex gap-3">
+                            <button className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wide border border-slate-300 rounded hover:bg-slate-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                </svg>
+                                Print
+                            </button>
+                            <button className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wide border border-slate-300 rounded hover:bg-slate-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                </svg>
+                                ZIP
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Document Container */}
+                <div className="max-w-5xl mx-auto px-6 py-12">
+                    <div className="bg-white border-l-4 border-slate-900 shadow-lg">
+
+                        {/* Document Header */}
+                        <div className="p-12 pb-8 border-b border-slate-200">
+                            <div className="grid grid-cols-4 gap-6 text-xs mb-8">
+                                <div>
+                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Notice No: REG-23-UL</div>
+                                    <div className="text-slate-700 font-medium">{mockData.documentType}</div>
+                                </div>
+                                <div>
+                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Issuing Authority</div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-orange-600 font-bold text-sm">⚠ {mockData.priority}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Effective Date</div>
+                                    <div className="text-slate-700 font-medium">{mockData.effectiveDate}</div>
+                                </div>
+                                <div>
+                                    <div className="text-slate-400 uppercase tracking-widest font-bold mb-2">Deadline</div>
+                                    <div className="text-slate-700 font-medium">{mockData.deadline}</div>
+                                </div>
+                            </div>
+
+                            <h1 className="text-5xl font-serif font-bold text-slate-900 mb-6 leading-tight">
+                                {mockData.title}
+                            </h1>
+
+                            <div className="flex gap-3">
+                                <span className="bg-green-50 text-green-700 px-4 py-2 rounded text-xs font-bold uppercase tracking-wide border border-green-200">
+                                    ✓ {mockData.compliance}
+                                </span>
+                                <span className="bg-green-100 text-green-800 px-4 py-2 rounded text-xs font-bold uppercase tracking-wide">
+                                    ⏱ {mockData.daysToRespond}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Hinglish Summary */}
+                        <div className="p-12 bg-green-50 border-b border-green-100">
+                            <div className="flex items-center gap-2 text-green-700 text-xs font-bold uppercase tracking-widest mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                    <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
+                                </svg>
+                                IN HINGLISH
+                            </div>
+                            <p className="text-slate-700 leading-relaxed text-base whitespace-pre-line">
+                                {mockData.hinglishSummary}
+                            </p>
+                        </div>
+
+                        {/* Who is Affected & Implications */}
+                        <div className="p-12 grid md:grid-cols-2 gap-12 border-b border-slate-200">
+                            <div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Who is Affected</h3>
+                                <div className="space-y-4">
+                                    {mockData.whoIsAffected.map((item, idx) => (
+                                        <div key={idx} className="flex items-center gap-3">
+                                            <span className="text-2xl">{item.icon}</span>
+                                            <span className="text-sm text-slate-700">{item.label}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Context & Implications</h3>
+                                <p className="text-sm text-slate-600 leading-relaxed">
+                                    {mockData.implications}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Action Checklist */}
+                        <div className="p-12 border-b border-slate-200">
+                            <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+                                <span className="w-5 h-5 bg-slate-900 text-white grid place-items-center text-xs rounded">✓</span>
+                                Action Checklist
+                            </h3>
+                            <div className="space-y-6">
+                                {mockData.actionChecklist.map((item, idx) => (
+                                    <div key={idx} className="flex gap-4">
+                                        <input type="checkbox" className="mt-1 w-4 h-4" />
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
+                                            <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Applicable Schemes */}
+                        <div className="p-12 bg-green-50">
+                            <div className="flex items-start gap-3 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700 mt-0.5">
+                                    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h3 className="text-sm font-bold text-green-900 uppercase tracking-wide mb-1">Eligible for Government Schemes</h3>
+                                    <h4 className="text-xl font-serif font-bold text-slate-900 mb-2">{mockData.applicableSchemes.title}</h4>
+                                    <p className="text-sm text-slate-600 mb-4">{mockData.applicableSchemes.description}</p>
+
+                                    <div className="bg-white border border-green-200 rounded p-4">
+                                        <h5 className="font-bold text-slate-900 mb-1">{mockData.applicableSchemes.incentive.title}</h5>
+                                        <p className="text-sm text-slate-600">{mockData.applicableSchemes.incentive.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="p-6 bg-slate-50 text-center">
+                            <p className="text-xs text-slate-400">
+                                Generated by <span className="font-bold text-slate-600">CivicSense AI</span>. This is an AI-assisted document analysis and should not be considered as binding legal advice. For the most accurate interpretation, please consult a legal professional for the original notice of the legal authority involved.
+                            </p>
+                            <p className="text-xs text-slate-400 mt-2">
+                                ID: AN-2024-01-20-1234 | Dec 20, 2026 3:15 PM
+                            </p>
+                        </div>
+
+                    </div>
+
+                    {/* Green Stamp */}
+                    <div className="flex justify-end mt-8">
+                        <div className="bg-green-100 border-2 border-green-600 rounded-lg px-6 py-4 rotate-3 shadow-md">
+                            <div className="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-green-600 mx-auto mb-1">
+                                    <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                                </svg>
+                                <div className="text-green-800 font-bold text-xs uppercase tracking-wider">Verified</div>
+                                <div className="text-green-700 font-bold text-sm">Analysis<br />Complete</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}

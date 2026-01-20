@@ -40,14 +40,14 @@ export default function UploadPage() {
       <main className="flex-grow bg-[#FAFAFA] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] py-16 px-6">
         <div className="max-w-3xl mx-auto">
           {/* Main Card */}
-          <div className="bg-white border border-slate-100 shadow-sm rounded-lg p-10 md:p-14">
+          <div className="bg-white border border-slate-100 shadow-sm rounded-lg p-12 md:p-16">
 
             {/* Card Header */}
-            <div className="text-center mb-10">
-              <h1 className="text-4xl font-serif font-bold text-[#0F172A] mb-3">
+            <div className="text-center mb-12">
+              <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#0F172A] mb-4">
                 Upload Your Notice
               </h1>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">
+              <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto">
                 Please upload the official government document you wish to interpret.
                 Ensure the file is a clean scan for optimal accuracy.
               </p>
@@ -71,8 +71,8 @@ export default function UploadPage() {
                 onClick={handleUpload}
                 disabled={!file || loading}
                 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide px-6 py-3 rounded transition-colors ${file && !loading
-                    ? "bg-[#E2E8F0] text-slate-800 hover:bg-slate-300"
-                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                  ? "bg-[#E2E8F0] text-slate-800 hover:bg-slate-300"
+                  : "bg-slate-100 text-slate-400 cursor-not-allowed"
                   }`}
               >
                 {loading ? "Processing..." : "Submit Document"}
