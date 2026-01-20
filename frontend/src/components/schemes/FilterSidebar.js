@@ -1,4 +1,41 @@
-export default function FilterSidebar() {
+import { useState } from "react";
+
+export default function FilterSidebar({ onFilterChange }) {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedMinistries, setSelectedMinistries] = useState([]);
+    const [selectedBenefits, setSelectedBenefits] = useState([]);
+
+    const ministries = ["Ministry of Agriculture", "Ministry of Health", "Ministry of Housing", "Ministry of Finance", "Ministry of Education", "Ministry of Social Welfare"];
+    const benefits = ["Financial Assistance", "Subsidies", "Insurance / Health", "Pension"];
+
+    const handleMinistryToggle = (ministry) => {
+        const updated = selectedMinistries.includes(ministry)
+            ? selectedMinistries.filter(m => m !== ministry)
+            : [...selectedMinistries, ministry];
+        setSelectedMinistries(updated);
+        onFilterChange?.({ ministries: updated, benefits: selectedBenefits, search: searchQuery });
+    };
+
+    const handleBenefitToggle = (benefit) => {
+        const updated = selectedBenefits.includes(benefit)
+            ? selectedBenefits.filter(b => b !== benefit)
+            : [...selectedBenefits, benefit];
+        setSelectedBenefits(updated);
+        onFilterChange?.({ ministries: selectedMinistries, benefits: updated, search: searchQuery });
+    };
+
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+        onFilterChange?.({ ministries: selectedMinistries, benefits: selectedBenefits, search: e.target.value });
+    };
+
+    const handleReset = () => {
+        setSearchQuery("");
+        setSelectedMinistries([]);
+        setSelectedBenefits([]);
+        onFilterChange?.({ ministries: [], benefits: [], search: "" });
+    };
+
     return (
         <aside className="w-64 border-r border-slate-100 p-6 hidden lg:block bg-[#FDFDFC]">
             <div className="flex items-center gap-2 mb-8 text-[#2F5233]">
@@ -11,6 +48,8 @@ export default function FilterSidebar() {
             <div className="mb-6 relative">
                 <input
                     type="text"
+                    value={searchQuery}
+                    onChange={handleSearch}
                     placeholder="Search keywords..."
                     className="w-full text-xs border border-slate-200 rounded px-3 py-2 bg-white focus:outline-none focus:border-slate-400"
                 />
@@ -23,9 +62,14 @@ export default function FilterSidebar() {
                 <div>
                     <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">By Ministry</h4>
                     <ul className="space-y-2 text-xs text-slate-600">
-                        {["Ministry of Agriculture", "Ministry of Health", "Ministry of Housing", "Ministry of Finance"].map(m => (
+                        {ministries.map(m => (
                             <li key={m} className="flex items-center gap-2">
-                                <input type="checkbox" className="rounded border-slate-300 text-[#2F5233] focus:ring-[#2F5233]" />
+                                <input
+                                    type="checkbox"
+                                    checked={selectedMinistries.includes(m)}
+                                    onChange={() => handleMinistryToggle(m)}
+                                    className="rounded border-slate-300 text-[#2F5233] focus:ring-[#2F5233]"
+                                />
                                 <span>{m}</span>
                             </li>
                         ))}
@@ -35,9 +79,14 @@ export default function FilterSidebar() {
                 <div>
                     <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Benefit Type</h4>
                     <ul className="space-y-2 text-xs text-slate-600">
-                        {["Financial Assistance", "Subsidies", "Insurance / Health", "Pension"].map(b => (
+                        {benefits.map(b => (
                             <li key={b} className="flex items-center gap-2">
-                                <input type="checkbox" className="rounded border-slate-300 text-[#2F5233] focus:ring-[#2F5233]" />
+                                <input
+                                    type="checkbox"
+                                    checked={selectedBenefits.includes(b)}
+                                    onChange={() => handleBenefitToggle(b)}
+                                    className="rounded border-slate-300 text-[#2F5233] focus:ring-[#2F5233]"
+                                />
                                 <span>{b}</span>
                             </li>
                         ))}
@@ -45,7 +94,10 @@ export default function FilterSidebar() {
                 </div>
             </div>
 
-            <button className="w-full mt-8 border border-slate-200 text-slate-700 text-xs font-semibold py-2 rounded hover:bg-slate-50 transition-colors">
+            <button
+                onClick={handleReset}
+                className="w-full mt-8 border border-slate-200 text-slate-700 text-xs font-semibold py-2 rounded hover:bg-slate-50 transition-colors"
+            >
                 Reset Filters
             </button>
         </aside>

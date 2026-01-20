@@ -21,6 +21,8 @@ export default function EligibilityForm({ onCheck }) {
                         value={form.age}
                         onChange={handleChange}
                         type="number"
+                        min="0"
+                        max="120"
                         placeholder="Years"
                         className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base focus:outline-none focus:border-slate-400"
                     />
@@ -28,11 +30,16 @@ export default function EligibilityForm({ onCheck }) {
 
                 <div>
                     <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Gender</label>
-                    <select className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400">
-                        <option>Select</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                    <select
+                        name="gender"
+                        value={form.gender}
+                        onChange={handleChange}
+                        className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400"
+                    >
+                        <option value="Select">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
 
@@ -53,23 +60,73 @@ export default function EligibilityForm({ onCheck }) {
 
                 <div>
                     <label className="block text-xs font-bold text-slate-400 uppercase mb-2">State / Union Territory</label>
-                    <select className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400">
-                        <option>Select Region</option>
-                        <option>Delhi</option>
-                        <option>Maharashtra</option>
-                        <option>Karnataka</option>
+                    <select
+                        name="state"
+                        value={form.state}
+                        onChange={handleChange}
+                        className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400"
+                    >
+                        <option value="Select Region">Select Region</option>
+                        <option value="All India">All India</option>
+                        <optgroup label="States">
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                        </optgroup>
+                        <optgroup label="Union Territories">
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                        </optgroup>
                     </select>
                 </div>
 
                 <div className="md:col-span-2 flex items-end justify-between">
                     <div className="flex-grow mr-6">
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Occupation / Status</label>
-                        <select className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400">
-                            <option>Select Status</option>
-                            <option>Unemployed</option>
-                            <option>Student</option>
-                            <option>Farmer</option>
-                            <option>Salaried</option>
+                        <select
+                            name="occupation"
+                            value={form.occupation}
+                            onChange={handleChange}
+                            className="w-full bg-white border border-slate-200 rounded px-4 py-3 text-base text-slate-600 focus:outline-none focus:border-slate-400"
+                        >
+                            <option value="Select Status">Select Status</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Student">Student</option>
+                            <option value="Farmer">Farmer</option>
+                            <option value="Salaried">Salaried</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Senior Citizen">Senior Citizen</option>
                         </select>
                     </div>
 
