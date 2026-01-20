@@ -8,6 +8,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
+from core.database import db
+
+@app.on_event("startup")
+async def startup_db_client():
+    db.connect()
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    db.close()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

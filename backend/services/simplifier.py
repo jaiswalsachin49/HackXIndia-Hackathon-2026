@@ -39,21 +39,40 @@ Format your response like this:
 [Any deadlines or "No immediate deadline" if none]
 """
 
+    import json
+    
+    explanation = None
     try:
         # Try API first (in priority order), fallback if it fails
         if LLM_PROVIDER == "groq" and GROQ_API_KEY:
-            return _simplify_with_groq(prompt)
+            # Groq now returns JSON string
+            json_str = _simplify_with_groq(prompt)
+            try:
+                explanation = json.loads(json_str)
+            except:
+                # Fallback if valid JSON not returned
+                explanation = {"hinglish": json_str, "english": "English summary not available via API."}
+                
         elif LLM_PROVIDER == "gemini" and GOOGLE_API_KEY:
-            return _simplify_with_gemini(prompt)
+            text_resp = _simplify_with_gemini(prompt)
+            explanation = {"hinglish": text_resp, "english": "English summary available in Hinglish section."}
+            
         elif LLM_PROVIDER == "openai" and OPENAI_API_KEY:
-            return _simplify_with_openai(prompt)
+            text_resp = _simplify_with_openai(prompt)
+            explanation = {"hinglish": text_resp, "english": "English summary available in Hinglish section."}
+            
         else:
             # Fallback to rule-based if no API key
-            return _fallback_simplification(text, notice_type, severity)
+            fallback_text = _fallback_simplification(text, notice_type, severity)
+            explanation = {"hinglish": fallback_text, "english": "This is a government notice. Please review the details carefully."}
+            
+        return explanation
+        
     except Exception as e:
         print(f"LLM Error: {e}")
         # Auto-fallback if API fails
-        return _fallback_simplification(text, notice_type, severity)
+        fallback_text = _fallback_simplification(text, notice_type, severity)
+        return {"hinglish": fallback_text, "english": "This is a government notice. Please review the details carefully."}
 
 
 def _simplify_with_openai(prompt: str) -> str:
@@ -100,13 +119,14 @@ def _simplify_with_groq(prompt: str) -> str:
         client = Groq(api_key=GROQ_API_KEY)
         
         response = client.chat.completions.create(
-            model="mixtral-8x7b-32768",  # Fast, free tier available
+            model="llama-3.3-70b-versatile",  # Current supported model
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that explains government notices in simple Hinglish."},
-                {"role": "user", "content": prompt}
+                {"role": "system", "content": "You are a helpful assistant. You must provide your response in valid JSON format with two keys: 'english' and 'hinglish'."},
+                {"role": "user", "content": prompt + "\n\nProvide the response as a JSON object with 'english' and 'hinglish' fields containing the respective explanations."}
             ],
-            temperature=0.7,
-            max_tokens=500
+            temperature=0.3,
+            max_tokens=1000,
+            response_format={"type": "json_object"}
         )
         
         return response.choices[0].message.content.strip()
