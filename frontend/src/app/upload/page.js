@@ -1,16 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Dropzone from "../../components/upload/Dropzone";
 import InfoSection from "../../components/upload/InfoSection";
+import LoginRequiredModal from "../../components/LoginRequiredModal";
 
 export default function UploadPage() {
+  const router = useRouter();
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("cs_token");
+    if (!token) {
+      setShowLoginModal(true);
+    }
+  }, []);
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 
   const handleUpload = async () => {
@@ -111,6 +122,7 @@ export default function UploadPage() {
       </main>
 
       <Footer />
+      <LoginRequiredModal isOpen={showLoginModal} onClose={() => { }} />
     </div>
   );
 }

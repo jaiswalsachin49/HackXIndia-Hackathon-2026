@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -15,6 +15,150 @@ export default function Profile() {
     const [dob, setDob] = useState("");
     const [gender, setGender] = useState("");
     const [address, setAddress] = useState("");
+
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    // Password Tab State
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [passwordSaving, setPasswordSaving] = useState(false);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            const token = localStorage.getItem("cs_token");
+            if (!token) {
+                router.push("/login");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8000/api/v1/auth/me", {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        localStorage.removeItem("cs_token");
+                        router.push("/login");
+                        return;
+                    }
+                    throw new Error("Failed to fetch profile");
+                }
+
+                const data = await response.json();
+                const names = data.full_name.split(" ");
+                setFirstName(names[0] || "");
+                setLastName(names.slice(1).join(" ") || "");
+                setEmail(data.email);
+                setMobile(data.phone || "");
+                setDob(data.dob || "");
+                setGender(data.gender || "");
+                setAddress(data.address || "");
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfile();
+    }, [router]);
+
+    const handleProfileUpdate = async (e) => {
+        e.preventDefault();
+        setSaving(true);
+        setError("");
+        setSuccess("");
+
+        const token = localStorage.getItem("cs_token");
+        try {
+            const response = await fetch("http://localhost:8000/api/v1/auth/profile", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    full_name: `${firstName} ${lastName}`.trim(),
+                    phone: mobile,
+                    dob,
+                    gender,
+                    address
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update profile");
+            }
+
+            setSuccess("Profile updated successfully!");
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("cs_token");
+        router.push("/login");
+    };
+
+    const handlePasswordUpdate = async (e) => {
+        e.preventDefault();
+        setError("");
+        setSuccess("");
+
+        if (newPassword !== confirmNewPassword) {
+            setError("New passwords do not match");
+            return;
+        }
+
+        setPasswordSaving(true);
+        const token = localStorage.getItem("cs_token");
+        try {
+            const response = await fetch("http://localhost:8000/api/v1/auth/password", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    current_password: currentPassword,
+                    new_password: newPassword
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.detail || "Failed to update password");
+            }
+
+            setSuccess("Password updated successfully!");
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmNewPassword("");
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setPasswordSaving(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2F5233]"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
@@ -33,10 +177,14 @@ export default function Profile() {
                         <aside className="lg:col-span-3 mb-8 lg:mb-0">
                             <nav className="space-y-1">
                                 <button
-                                    onClick={() => setActiveTab("profile")}
+                                    onClick={() => {
+                                        setActiveTab("profile");
+                                        setError("");
+                                        setSuccess("");
+                                    }}
                                     className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${activeTab === "profile"
-                                            ? "bg-white text-[#2F5233] shadow-sm ring-1 ring-slate-200"
-                                            : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                                        ? "bg-white text-[#2F5233] shadow-sm ring-1 ring-slate-200"
+                                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                                         }`}
                                 >
                                     <svg className={`w-5 h-5 ${activeTab === "profile" ? "text-[#2F5233]" : "text-slate-400 group-hover:text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,10 +194,14 @@ export default function Profile() {
                                 </button>
 
                                 <button
-                                    onClick={() => setActiveTab("password")}
+                                    onClick={() => {
+                                        setActiveTab("password");
+                                        setError("");
+                                        setSuccess("");
+                                    }}
                                     className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${activeTab === "password"
-                                            ? "bg-white text-[#2F5233] shadow-sm ring-1 ring-slate-200"
-                                            : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                                        ? "bg-white text-[#2F5233] shadow-sm ring-1 ring-slate-200"
+                                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                                         }`}
                                 >
                                     <svg className={`w-5 h-5 ${activeTab === "password" ? "text-[#2F5233]" : "text-slate-400 group-hover:text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,7 +213,7 @@ export default function Profile() {
 
                             <div className="mt-8 pt-8 border-t border-slate-200">
                                 <button
-                                    onClick={() => router.push("/login")}
+                                    onClick={handleLogout}
                                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 rounded-lg hover:bg-red-50 transition-colors"
                                 >
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +253,18 @@ export default function Profile() {
                                             </div>
                                         </div>
 
-                                        <form className="space-y-8">
+                                        {error && (
+                                            <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm">
+                                                {error}
+                                            </div>
+                                        )}
+                                        {success && (
+                                            <div className="mb-6 p-4 bg-green-50 border border-green-100 text-green-600 rounded-lg text-sm">
+                                                {success}
+                                            </div>
+                                        )}
+
+                                        <form onSubmit={handleProfileUpdate} className="space-y-8">
                                             {/* Personal Info Group */}
                                             <div>
                                                 <div className="flex items-center gap-2 mb-6">
@@ -188,14 +351,14 @@ export default function Profile() {
 
                                                 <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                                                     <div className="sm:col-span-4">
-                                                        <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">Email address</label>
+                                                        <label htmlFor="email-profile" className="block text-sm font-medium text-slate-700 mb-1.5">Email address</label>
                                                         <input
                                                             type="email"
                                                             name="email"
-                                                            id="email"
+                                                            id="email-profile"
                                                             value={email}
-                                                            onChange={(e) => setEmail(e.target.value)}
-                                                            className="block w-full rounded-md border-slate-300 shadow-sm focus:border-[#2F5233] focus:ring-[#2F5233] sm:text-sm py-2.5 px-3"
+                                                            disabled
+                                                            className="block w-full rounded-md border-slate-300 bg-slate-50 shadow-sm sm:text-sm py-2.5 px-3 cursor-not-allowed"
                                                         />
                                                     </div>
 
@@ -227,12 +390,13 @@ export default function Profile() {
 
                                             {/* Action Buttons */}
                                             <div className="pt-6 flex items-center justify-end gap-x-4 border-t border-slate-100">
-                                                <button type="button" className="text-sm font-semibold leading-6 text-slate-900 hover:text-slate-700">Cancel</button>
+                                                <button type="button" onClick={() => router.push("/")} className="text-sm font-semibold leading-6 text-slate-900 hover:text-slate-700">Cancel</button>
                                                 <button
                                                     type="submit"
-                                                    className="rounded-md bg-[#2F5233] px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#234a2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F5233] transition-colors"
+                                                    disabled={saving}
+                                                    className="rounded-md bg-[#2F5233] px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#234a2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F5233] transition-colors disabled:opacity-50"
                                                 >
-                                                    Save Changes
+                                                    {saving ? "Saving..." : "Save Changes"}
                                                 </button>
                                             </div>
                                         </form>
@@ -246,7 +410,18 @@ export default function Profile() {
                                             <p className="text-sm text-slate-500">Ensure your account is using a long, random password to stay secure.</p>
                                         </div>
 
-                                        <form className="max-w-2xl space-y-6">
+                                        {error && (
+                                            <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm">
+                                                {error}
+                                            </div>
+                                        )}
+                                        {success && (
+                                            <div className="mb-6 p-4 bg-green-50 border border-green-100 text-green-600 rounded-lg text-sm">
+                                                {success}
+                                            </div>
+                                        )}
+
+                                        <form onSubmit={handlePasswordUpdate} className="max-w-2xl space-y-6">
                                             <div>
                                                 <label htmlFor="current-password" class="block text-sm font-medium leading-6 text-slate-900">Current Password</label>
                                                 <div class="mt-2">
@@ -254,6 +429,9 @@ export default function Profile() {
                                                         type="password"
                                                         name="current-password"
                                                         id="current-password"
+                                                        required
+                                                        value={currentPassword}
+                                                        onChange={(e) => setCurrentPassword(e.target.value)}
                                                         className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#2F5233] sm:text-sm sm:leading-6"
                                                     />
                                                 </div>
@@ -266,6 +444,9 @@ export default function Profile() {
                                                         type="password"
                                                         name="new-password"
                                                         id="new-password"
+                                                        required
+                                                        value={newPassword}
+                                                        onChange={(e) => setNewPassword(e.target.value)}
                                                         className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#2F5233] sm:text-sm sm:leading-6"
                                                     />
                                                 </div>
@@ -278,6 +459,9 @@ export default function Profile() {
                                                         type="password"
                                                         name="confirm-password"
                                                         id="confirm-password"
+                                                        required
+                                                        value={confirmNewPassword}
+                                                        onChange={(e) => setConfirmNewPassword(e.target.value)}
                                                         className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#2F5233] sm:text-sm sm:leading-6"
                                                     />
                                                 </div>
@@ -286,9 +470,10 @@ export default function Profile() {
                                             <div className="pt-4 flex items-center justify-end gap-x-4">
                                                 <button
                                                     type="submit"
-                                                    className="rounded-md bg-[#2F5233] px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#234a2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F5233] transition-colors"
+                                                    disabled={passwordSaving}
+                                                    className="rounded-md bg-[#2F5233] px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#234a2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F5233] transition-colors disabled:opacity-50"
                                                 >
-                                                    Update Password
+                                                    {passwordSaving ? "Updating..." : "Update Password"}
                                                 </button>
                                             </div>
                                         </form>
@@ -301,6 +486,6 @@ export default function Profile() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

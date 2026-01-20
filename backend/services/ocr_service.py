@@ -53,8 +53,14 @@ def _extract_from_image(file) -> str:
         
         return extracted_text
         
+    except pytesseract.TesseractNotFoundError:
+        logger.error("Tesseract not found. Please install tesseract-ocr.")
+        raise Exception("Server configuration error: Tesseract OCR is not installed. Please ask the administrator to install 'tesseract' on the backend server.")
     except Exception as e:
         logger.error(f"Image OCR failed: {str(e)}")
+        # Check for common "command not found" type errors that might come as generic exceptions
+        if "No such file or directory: 'tesseract'" in str(e) or "command not found" in str(e):
+             raise Exception("Server configuration error: Tesseract OCR is not installed.")
         raise
 
 

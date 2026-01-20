@@ -1,31 +1,46 @@
 from fastapi import FastAPI
 from api.v1.router import api_router
+from api import auth
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+from contextlib import asynccontextmanager
+from core.database import db
+
+load_dotenv()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    db.connect()
+    yield
+    # Shutdown
+    db.close()
 
 app = FastAPI(
     title="CivicSense AI",
     description="Understand government & legal notices and discover citizen entitlements",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
-from core.database import db
-
-@app.on_event("startup")
-async def startup_db_client():
-    db.connect()
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    db.close()
+# CORS Middleware
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Include routers
 app.include_router(api_router)
+app.include_router(auth.router)
 
 @app.get("/")
 def root():

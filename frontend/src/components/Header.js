@@ -1,8 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Header() {
+    const [scrolled, setScrolled] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        // Check login status
+        const token = localStorage.getItem("cs_token");
+        setIsLoggedIn(!!token);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
         <header className="w-full bg-white border-b border-slate-100">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -27,15 +43,32 @@ export default function Header() {
                         <Link href="/help" className="hover:text-slate-900 transition-colors">Help</Link>
                     </nav>
 
-                    {/* Profile Link */}
-                    <Link
-                        href="/profile"
-                        className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors grid place-items-center text-slate-600"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
-                        </svg>
-                    </Link>
+                    {isLoggedIn ? (
+                        /* Profile Link */
+                        <Link
+                            href="/profile"
+                            className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors grid place-items-center text-slate-600"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                            </svg>
+                        </Link>
+                    ) : (
+                        <div className="flex items-center gap-4">
+                            <Link
+                                href="/login"
+                                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                            >
+                                Sign in
+                            </Link>
+                            <Link
+                                href="/signup"
+                                className="text-sm font-medium bg-[#2F5233] text-white px-4 py-2 rounded-lg hover:bg-[#234a2e] transition-colors"
+                            >
+                                Sign up
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </header>

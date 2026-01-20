@@ -1,5 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import certifi
 from core.logger import get_logger
 
 logger = get_logger(__name__)
@@ -15,7 +16,8 @@ class Database:
                 logger.warning("MONGO_URI not found in environment variables. Database features will be disabled.")
                 return
 
-            self.client = AsyncIOMotorClient(mongo_uri)
+            # Use certifi for SSL certificate verification
+            self.client = AsyncIOMotorClient(mongo_uri, tlsCAFile=certifi.where())
             # Verify connection
             # await self.client.admin.command('ping')
             logger.info("✅ Successfully connected to MongoDB")

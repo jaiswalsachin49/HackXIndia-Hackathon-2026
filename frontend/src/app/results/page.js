@@ -12,6 +12,13 @@ export default function ResultsPage() {
     const [language, setLanguage] = useState('english');
 
     useEffect(() => {
+        // Check login
+        const token = localStorage.getItem("cs_token");
+        if (!token) {
+            router.push("/login");
+            return;
+        }
+
         // Load data from localStorage
         const storedData = localStorage.getItem('noticeResult');
         const fileName = localStorage.getItem('uploadedFile');
