@@ -719,3 +719,142 @@
 2026-01-20 23:10:34,964 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
 2026-01-20 23:10:34,964 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
 2026-01-20 23:10:35,166 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 00:07:46,023 - api.v1.routes.schemes - INFO - Finding schemes for: age=50, income=100000
+2026-01-21 00:07:46,033 - api.v1.routes.schemes - INFO - Found 11 eligible schemes
+2026-01-21 00:34:08,585 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 00:34:08,592 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 00:34:08,633 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 00:34:08,676 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 00:34:08,676 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 00:34:08,676 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 00:34:10,655 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 00:34:10,672 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 00:34:43,944 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 00:34:43,946 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 00:34:43,949 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 00:34:43,975 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 00:34:43,975 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 00:34:43,975 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 00:34:45,566 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 00:34:45,570 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 00:42:21,685 - core.database - INFO - MongoDB connection closed
+2026-01-21 00:42:24,782 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 00:42:24,782 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 00:42:24,782 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 00:42:25,394 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 00:42:25,394 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 00:42:26,996 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 00:42:26,996 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 00:42:27,535 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 00:42:27,536 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 00:42:28,029 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 00:42:28,029 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 00:42:28,522 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 00:42:28,522 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 00:42:28,800 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 00:43:34,883 - core.database - INFO - MongoDB connection closed
+2026-01-21 00:43:38,678 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 00:43:38,678 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 00:43:38,678 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 00:43:39,278 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 00:43:39,279 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 00:43:40,046 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 00:43:40,047 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 00:43:40,641 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 00:43:40,641 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 00:43:41,353 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 00:43:41,353 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 00:43:41,944 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 00:43:41,944 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 00:43:42,941 - services.scheme_engine - INFO - Loaded 15 schemes from cache
+2026-01-21 00:43:42,941 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 00:43:42,941 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 00:43:43,664 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 00:43:43,664 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 00:43:44,622 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 00:43:44,622 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 00:43:45,837 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 00:43:45,837 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 00:43:46,904 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 00:43:46,904 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 00:43:47,522 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 00:43:47,522 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 00:43:47,733 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 00:44:35,752 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 00:44:35,753 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 00:44:35,761 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 00:44:35,791 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 00:44:35,791 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 00:44:35,791 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 00:44:37,979 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 00:44:38,007 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 00:51:16,037 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 00:51:16,042 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 00:51:16,065 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 00:51:16,123 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 00:51:16,123 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 00:51:16,123 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 00:51:17,541 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 00:51:17,559 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:00:17,433 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 01:00:17,441 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 01:00:17,467 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:00:17,534 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 01:00:17,535 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 01:00:17,535 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 01:00:18,821 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:00:18,839 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:03:06,426 - api.v1.routes.upload - INFO - Processing file: WhatsApp Image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 01:03:06,431 - services.ocr_service - INFO - Extracting text from: whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 01:03:07,946 - services.ocr_service - INFO - OCR extracted 1321 characters from image
+2026-01-21 01:03:07,947 - services.ocr_service - INFO - Extracted 1321 characters from whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 01:03:07,947 - api.v1.routes.upload - INFO - Extracted text length: 1321 characters
+2026-01-21 01:03:09,462 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:03:09,481 - api.v1.routes.upload - INFO - Successfully processed notice: Court Summon
+2026-01-21 01:03:36,857 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 01:03:36,859 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 01:03:36,882 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:03:36,957 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 01:03:36,957 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 01:03:36,957 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 01:03:37,890 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:03:37,908 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:04:39,953 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 01:04:39,959 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 01:04:39,975 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:04:40,040 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 01:04:40,040 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 01:04:40,041 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 01:04:41,140 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:04:41,188 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:06:22,903 - api.v1.routes.upload - INFO - Processing file: WhatsApp Image 2026-01-20 at 16.38.27.jpeg
+2026-01-21 01:06:22,909 - services.ocr_service - INFO - Extracting text from: whatsapp image 2026-01-20 at 16.38.27.jpeg
+2026-01-21 01:06:25,086 - services.ocr_service - INFO - OCR extracted 1553 characters from image
+2026-01-21 01:06:25,087 - services.ocr_service - INFO - Extracted 1553 characters from whatsapp image 2026-01-20 at 16.38.27.jpeg
+2026-01-21 01:06:25,087 - api.v1.routes.upload - INFO - Extracted text length: 1553 characters
+2026-01-21 01:06:26,220 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:06:26,243 - api.v1.routes.upload - INFO - Successfully processed notice: Scheme Enrollment
+2026-01-21 01:06:43,244 - api.v1.routes.upload - INFO - Processing file: Resume.pdf
+2026-01-21 01:06:43,247 - services.ocr_service - INFO - Extracting text from: resume.pdf
+2026-01-21 01:06:43,256 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:06:43,310 - services.ocr_service - INFO - PDF extraction: 2991 total characters
+2026-01-21 01:06:43,310 - services.ocr_service - INFO - Extracted 2991 characters from resume.pdf
+2026-01-21 01:06:43,310 - api.v1.routes.upload - INFO - Extracted text length: 2991 characters
+2026-01-21 01:06:44,155 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:06:44,160 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:06:58,297 - api.v1.routes.upload - INFO - Processing file: Skai Lama_Fullstack Developer Intern_June'26.pdf
+2026-01-21 01:06:58,299 - services.ocr_service - INFO - Extracting text from: skai lama_fullstack developer intern_june'26.pdf
+2026-01-21 01:06:58,359 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:06:58,428 - services.ocr_service - INFO - PDF extraction: 1197 total characters
+2026-01-21 01:06:58,428 - services.ocr_service - INFO - Extracted 1197 characters from skai lama_fullstack developer intern_june'26.pdf
+2026-01-21 01:06:58,428 - api.v1.routes.upload - INFO - Extracted text length: 1197 characters
+2026-01-21 01:06:59,080 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:06:59,097 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 01:07:11,424 - api.v1.routes.upload - INFO - Processing file: Skai Lama_Fullstack Developer Intern_June'26.pdf
+2026-01-21 01:07:11,425 - services.ocr_service - INFO - Extracting text from: skai lama_fullstack developer intern_june'26.pdf
+2026-01-21 01:07:11,427 - services.ocr_service - INFO - PDF has 1 pages
+2026-01-21 01:07:11,461 - services.ocr_service - INFO - PDF extraction: 1197 total characters
+2026-01-21 01:07:11,461 - services.ocr_service - INFO - Extracted 1197 characters from skai lama_fullstack developer intern_june'26.pdf
+2026-01-21 01:07:11,461 - api.v1.routes.upload - INFO - Extracted text length: 1197 characters
+2026-01-21 01:07:12,034 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 01:07:12,097 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
