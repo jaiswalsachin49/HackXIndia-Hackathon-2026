@@ -1,1 +1,159 @@
-{}
+{
+    "tax_notices": {
+        "keywords": [
+            "income tax",
+            "itr",
+            "gst",
+            "tax return",
+            "assessment",
+            "tds",
+            "pan"
+        ],
+        "types": [
+            "Income Tax Notice",
+            "GST Notice",
+            "Property Tax Notice",
+            "TDS Notice"
+        ]
+    },
+    "legal_notices": {
+        "keywords": [
+            "court",
+            "summon",
+            "legal action",
+            "case",
+            "hearing",
+            "plaintiff",
+            "defendant",
+            "advocate",
+            "litigation"
+        ],
+        "types": [
+            "Court Summon",
+            "Legal Notice",
+            "Civil Suit",
+            "Criminal Complaint"
+        ]
+    },
+    "civic_notices": {
+        "keywords": [
+            "municipality",
+            "water bill",
+            "electricity",
+            "license",
+            "permit",
+            "registration",
+            "renewal"
+        ],
+        "types": [
+            "Utility Bill Notice",
+            "License Renewal",
+            "Property Registration",
+            "Municipal Notice"
+        ]
+    },
+    "employment_notices": {
+        "keywords": [
+            "pf",
+            "provident fund",
+            "esi",
+            "employee",
+            "salary",
+            "pension",
+            "gratuity"
+        ],
+        "types": [
+            "PF Notice",
+            "ESI Notice",
+            "Pension Related",
+            "Employment Verification"
+        ]
+    },
+    "benefit_notices": {
+        "keywords": [
+            "scheme",
+            "subsidy",
+            "benefit",
+            "assistance",
+            "grant",
+            "allowance",
+            "pension approval"
+        ],
+        "types": [
+            "Scheme Enrollment",
+            "Subsidy Approval",
+            "Benefit Notification",
+            "Grant Sanction"
+        ]
+    },
+    "land_property": {
+        "keywords": [
+            "land",
+            "property",
+            "deed",
+            "mutation",
+            "khata",
+            "revenue",
+            "tehsil"
+        ],
+        "types": [
+            "Land Revenue Notice",
+            "Property Mutation",
+            "Encroachment Notice",
+            "Property Tax Assessment"
+        ]
+    },
+    "traffic_violations": {
+        "keywords": [
+            "challan",
+            "traffic",
+            "vehicle",
+            "driving license",
+            "rto",
+            "fine",
+            "violation"
+        ],
+        "types": [
+            "Traffic Challan",
+            "Vehicle Registration",
+            "Driving License",
+            "RTO Notice"
+        ]
+    },
+    "severity_keywords": {
+        "urgent": [
+            "penalty",
+            "fine",
+            "legal action",
+            "court",
+            "arrest",
+            "warrant",
+            "immediate",
+            "deadline",
+            "last notice",
+            "foreclosure",
+            "eviction",
+            "seizure"
+        ],
+        "action_required": [
+            "submit",
+            "response required",
+            "verification",
+            "clarification",
+            "documents needed",
+            "appear",
+            "within days",
+            "compliance"
+        ],
+        "informational": [
+            "information",
+            "update",
+            "notification",
+            "acknowledgment",
+            "reminder",
+            "fyi",
+            "awareness",
+            "circular"
+        ]
+    }
+}

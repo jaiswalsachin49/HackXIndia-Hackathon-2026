@@ -7,3 +7,6 @@ pytesseract
 opencv-python
 langchain
 openai
+python-dotenv
+google-generativeai
+PyPDF2
