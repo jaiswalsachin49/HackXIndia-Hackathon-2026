@@ -19,6 +19,7 @@ export default function SchemesPage() {
     benefits: []
   });
   const [allResults, setAllResults] = useState([]);
+  const [initialLoad, setInitialLoad] = useState(true);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -31,9 +32,34 @@ export default function SchemesPage() {
     }
   }, []);
 
+  // Load all schemes on page mount
+  useEffect(() => {
+    const fetchAllSchemes = async () => {
+      setLoading(true);
+      try {
+        const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
+        const response = await fetch(`${API_BASE}/api/v1/schemes`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setAllResults(data.schemes || []);
+          setResults(data.schemes || []);
+          setInitialLoad(false);
+        }
+      } catch (err) {
+        console.error("Error fetching all schemes:", err);
+        setError("Failed to load schemes. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllSchemes();
+  }, []);
+
   // Apply filters to results
   useEffect(() => {
-    if (!searched || allResults.length === 0) return;
+    if (allResults.length === 0) return;
 
     let filtered = [...allResults];
 
@@ -59,7 +85,7 @@ export default function SchemesPage() {
     if (filters.benefits.length > 0) {
       filtered = filtered.filter(scheme =>
         filters.benefits.some(benefit =>
-          scheme.tags?.includes(benefit) ||
+          scheme.category?.toLowerCase().includes(benefit.toLowerCase()) ||
           scheme.description?.toLowerCase().includes(benefit.toLowerCase())
         )
       );
@@ -70,7 +96,7 @@ export default function SchemesPage() {
     }
 
     setResults(filtered);
-  }, [filters, allResults, searched, sortBy]);
+  }, [filters, allResults, sortBy]);
 
   const handleTagClick = (tag) => {
     setFilters(prev => ({ ...prev, search: tag }));
@@ -137,14 +163,14 @@ export default function SchemesPage() {
               </div>
 
               {/* Stats Bar */}
-              {searched && (
+              {results.length > 0 && (
                 <div className="flex gap-4 mt-6">
                   <div className="bg-white rounded-xl px-4 py-3 border border-slate-100 flex items-center gap-3">
                     <div className="w-10 h-10 bg-[#2F5233]/10 rounded-full flex items-center justify-center">
                       <Filter className="w-5 h-5 text-[#2F5233]" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 font-medium">Found</p>
+                      <p className="text-xs text-slate-500 font-medium">{searched ? "Eligible" : "Available"}</p>
                       <p className="text-lg font-bold text-slate-900">{results.length} Schemes</p>
                     </div>
                   </div>
@@ -170,35 +196,25 @@ export default function SchemesPage() {
             </div>
 
             {/* Eligibility Form - Collapsible */}
-            {(!searched || showEligibilityForm) && (
-              <div className="max-w-7xl mx-auto mb-12">
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#2F5233]/5 to-transparent p-6 border-b border-slate-100">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h2 className="text-xl font-serif font-bold text-slate-900 mb-1">
-                          Eligibility Check
-                        </h2>
-                        <p className="text-sm text-slate-500">
-                          Enter your details to find personalized scheme recommendations
-                        </p>
-                      </div>
-                      {searched && (
-                        <button
-                          onClick={() => setShowEligibilityForm(false)}
-                          className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors"
-                        >
-                          Close
-                        </button>
-                      )}
+            <div className="max-w-7xl mx-auto mb-12">
+              <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div className="bg-gradient-to-r from-[#2F5233]/5 to-transparent p-6 border-b border-slate-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-serif font-bold text-slate-900 mb-1">
+                        Find Personalized Schemes
+                      </h2>
+                      <p className="text-sm text-slate-500">
+                        Fill in your details to discover schemes you're eligible for
+                      </p>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <EligibilityForm onCheck={handleEligibilitySubmit} loading={loading} />
-                  </div>
+                </div>
+                <div className="p-6">
+                  <EligibilityForm onCheck={handleEligibilitySubmit} loading={loading} />
                 </div>
               </div>
-            )}
+            </div>
 
             {/* Popular Tags */}
             {!searched && (
@@ -240,8 +256,11 @@ export default function SchemesPage() {
             )}
 
             {/* Results Grid */}
-            {searched && !loading && results.length > 0 && (
+            {!loading && results.length > 0 && (
               <div className="max-w-7xl mx-auto">
+                <h2 className="text-2xl font-serif font-bold text-slate-900 mb-6">
+                  {searched ? "Eligible Schemes for You" : "All Available Schemes"}
+                </h2>
                 <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {results.map((scheme, index) => (
                     <SchemeCard key={index} scheme={scheme} />
