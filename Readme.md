@@ -1,5 +1,8 @@
 # CivicSense AI - Simplifying Governance for Everyone
 
+
+✅ **Project Status: Finished**
+
 ### 🏆 Submission for HackXIndia Hackathon 2026
 
 **Team Name:** UrbanIQ  
@@ -12,7 +15,7 @@
 ---
 
 ### 🎥 Project Video
-[Link to Video Demo]
+[Watch the Demo](https://drive.google.com/drive/folders/10bqEaoI1tpIS9rhtN8vkdIFbe9K6SJll?usp=drive_link)
 
 ---
 
@@ -37,43 +40,118 @@ Every day, millions of citizens struggle to understand government notices, circu
 ---
 
 ### 🛠️ Tech Stack
-- **Frontend**: Next.js , Tailwind CSS, Framer Motion, Lucide React
-- **Backend**: FastAPI , Uvicorn
-- **AI/ML**: Groq API (LLaMA 3) for text analysis and summarization
-- **Database**: MongoDB
-- **Deployment**: Vercel (Frontend), Render (Backend)
+
+**Frontend**
+- **Next.js 16** (React 19)
+- **Tailwind CSS 4**
+- **Framer Motion** for animations
+- **Lucide React** for icons
+
+**Backend**
+- **FastAPI** (Python 3.10+)
+- **Uvicorn** (ASGI Server)
+- **Tesseract OCR** (for image text extraction)
+- **LangChain & Groq API** (LLM integration)
+- **MongoDB** (Motor asyncio driver)
+
+**AI/ML**
+- **Groq API** (Llama 3 models) for fast inference
+- **Tesseract** for optical character recognition
+
+---
+
+### ⚙️ Environment Configuration
+
+You must configure environment variables for both the backend and frontend.
+
+#### Backend (`backend/.env`)
+Create a `.env` file in the `backend/` directory:
+
+```env
+# Server
+API_HOST=0.0.0.0
+API_PORT=8000
+
+# Database
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
+
+# LLM Provider (Choose one: groq, openai, gemini)
+LLM_PROVIDER=groq
+
+# API Keys (Fill based on your chosen provider)
+GROQ_API_KEY=your_groq_api_key_here
+OPENAI_API_KEY=
+GOOGLE_API_KEY=
+```
+
+#### Frontend (`frontend/.env.local`)
+Create a `.env.local` file in the `frontend/` directory if required by your frontend logic (e.g., API base URL).
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
 ---
 
 ### 🏃‍♂️ How to Run Locally
 
-#### Prerequisites
-- Node.js & npm
-- Python 3.8+
-- Git
+You can run the project manually or using Docker for the backend.
 
-#### 1. Clone the Repository
+#### Method 1: Manual Setup (Recommended for Development)
+
+**Prerequisites:**
+- Node.js (v18+) & npm
+- Python 3.10+
+- **Tesseract OCR** installed on your system.
+  - *macOS*: `brew install tesseract`
+  - *Windows*: Download installer from UB-Mannheim
+  - *Linux*: `sudo apt-get install tesseract-ocr`
+
+**1. Clone the Repository**
 ```bash
 git clone https://github.com/jaiswalsachin49/HackXIndia-Hackathon-2026.git
 cd HackXIndia-Hackathon-2026
 ```
 
-#### 2. Backend Setup
+**2. Backend Setup**
 ```bash
 cd backend
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install Python dependencies
 pip install -r requirements.txt
-# Create .env file with your GROQ_API_KEY and other secrets
+
+# Run the server
 python3 main.py
 ```
+*Server will be running at [http://localhost:8000](http://localhost:8000). Documentation available at [http://localhost:8000/docs](http://localhost:8000/docs).*
 
-#### 3. Frontend Setup
+**3. Frontend Setup**
 ```bash
-cd frontend
+cd ../frontend  # From backend dir
 npm install
-# Create .env.local file if needed
 npm run dev
+```
+*Frontend will be running at [http://localhost:3000](http://localhost:3000).*
+
+---
+
+#### Method 2: Docker Setup (Backend Only)
+
+If you have Docker installed, you can containerize the backend to avoid installing system dependencies like Tesseract manually.
+
+**1. Build the Docker Image**
+```bash
+cd backend
+docker build -t civicsense-backend .
+```
+
+**2. Run the Container**
+Make sure you have your `.env` file ready in the `backend/` directory.
+
+```bash
+docker run -d -p 8000:8000 --env-file .env civicsense-backend
 ```
 
 ---
