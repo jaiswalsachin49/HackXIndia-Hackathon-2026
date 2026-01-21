@@ -19,6 +19,11 @@
 
 ---
 
+### Project Deployment Link
+ Link: [CivicSense AI](https://hack-x-india-hackathon-2026-rho.vercel.app/)
+
+---
+
 ### ❓ Problem Statement
 **The Gap Between Citizens and Government**
 Every day, millions of citizens struggle to understand government notices, circulars, and schemes. These documents are often written in complex bureaucratic and legal language (legalese) that is inaccessible to the average person. This lack of understanding leads to:
