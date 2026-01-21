@@ -11,16 +11,42 @@ export default function SchemeCard({ scheme }) {
         router.push(`/schemes/${schemeId}`);
     };
 
-    // Smart banner selection logic
+    // Smart contextual banner selection
     const getBannerImage = () => {
-        const text = (scheme.ministry + " " + scheme.name + " " + (scheme.tags?.join(" ") || "")).toLowerCase();
+        const text = (scheme.ministry + " " + scheme.name + " " + scheme.category + " " + (scheme.benefits || "")).toLowerCase();
 
-        if (text.includes("agriculture") || text.includes("farm") || text.includes("kisan") || text.includes("rural")) return "/images/scheme_banner_finance.png"; // Fallback to compatible generic
-        if (text.includes("educat") || text.includes("school") || text.includes("scholarship") || text.includes("student")) return "/images/scheme_banner_education.png";
-        if (text.includes("health") || text.includes("medic") || text.includes("ayushman") || text.includes("wellness")) return "/images/scheme_banner_health.png";
-        if (text.includes("financ") || text.includes("money") || text.includes("loan") || text.includes("bank") || text.includes("pension")) return "/images/scheme_banner_finance.png";
+        // Health & Medical
+        if (text.includes("health") || text.includes("medic") || text.includes("ayushman") || text.includes("hospital") || text.includes("insurance")) {
+            return "/images/scheme_health.png";
+        }
 
-        return "/images/scheme_banner_finance.png"; // Default generic premium banner
+        // Agriculture & Farming
+        if (text.includes("agriculture") || text.includes("farm") || text.includes("kisan") || text.includes("crop") || text.includes("rural")) {
+            return "/images/scheme_agriculture.png";
+        }
+
+        // Education & Scholarship
+        if (text.includes("educat") || text.includes("school") || text.includes("scholarship") || text.includes("student") || text.includes("girl child")) {
+            return "/images/scheme_education.png";
+        }
+
+        // Finance, Banking & Business
+        if (text.includes("financ") || text.includes("money") || text.includes("loan") || text.includes("bank") || text.includes("pension") || text.includes("business") || text.includes("mudra")) {
+            return "/images/scheme_finance.png";
+        }
+
+        // Housing
+        if (text.includes("hous") || text.includes("awas") || text.includes("home") || text.includes("shelter")) {
+            return "/images/scheme_housing.png";
+        }
+
+        // BPL & Social Welfare
+        if (text.includes("bpl") || text.includes("welfare") || text.includes("poor") || text.includes("ujjwala") || text.includes("livelihood")) {
+            return "/images/scheme_welfare.png";
+        }
+
+        // Default to finance as general fallback
+        return "/images/scheme_finance.png";
     };
 
     return (

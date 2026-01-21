@@ -27,10 +27,21 @@ app = FastAPI(
 )
 
 # CORS Middleware
+# CORS Middleware
 origins = [
+    os.getenv("CLIENT_URL"),
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+client_url = os.getenv("CLIENT_URL")
+if client_url:
+    origins.append(client_url)
+    # Also allow the version with trailing slash if needed, or without
+    if client_url.endswith("/"):
+        origins.append(client_url[:-1])
+    else:
+        origins.append(client_url + "/")
 
 app.add_middleware(
     CORSMiddleware,
