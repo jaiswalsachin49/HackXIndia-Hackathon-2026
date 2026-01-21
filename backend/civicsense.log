@@ -1,0 +1,87 @@
+2026-01-21 07:43:32,454 - services.scheme_engine - INFO - Loaded 83 schemes from cache
+2026-01-21 07:43:32,454 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 07:43:32,454 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 07:43:32,875 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 07:43:32,875 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 07:43:33,243 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 07:43:33,243 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 07:43:33,488 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 07:43:33,488 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 07:43:33,817 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 07:43:33,818 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 07:43:34,112 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 07:43:34,112 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 07:43:34,918 - services.scheme_engine - INFO - Loaded 83 schemes from cache
+2026-01-21 07:43:34,918 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 07:43:34,918 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 07:43:35,263 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 07:43:35,263 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 07:43:35,522 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 07:43:35,522 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 07:43:35,829 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 07:43:35,829 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 07:43:36,149 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 07:43:36,149 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 07:43:36,354 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 07:43:36,354 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 07:43:36,518 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 07:43:40,854 - api.auth - INFO - User logged in: Admin@gmail.com
+2026-01-21 07:43:51,183 - api.v1.routes.upload - INFO - Processing file: WhatsApp Image 2026-01-21 at 03.02.46.jpeg
+2026-01-21 07:43:51,184 - services.ocr_service - INFO - Extracting text from: whatsapp image 2026-01-21 at 03.02.46.jpeg
+2026-01-21 07:43:51,943 - services.ocr_service - INFO - OCR extracted 1707 characters from image (Size: (990, 1280), Mode: RGB)
+2026-01-21 07:43:51,943 - services.ocr_service - INFO - Extracted 1707 characters from whatsapp image 2026-01-21 at 03.02.46.jpeg
+2026-01-21 07:43:51,943 - api.v1.routes.upload - INFO - Extracted text length: 1707 characters
+2026-01-21 07:43:54,405 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:43:54,432 - api.v1.routes.upload - INFO - Successfully processed notice: Income Tax Notice
+2026-01-21 07:48:49,899 - core.database - INFO - MongoDB connection closed
+2026-01-21 07:48:55,913 - services.scheme_engine - INFO - Loaded 83 schemes from cache
+2026-01-21 07:48:55,913 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 07:48:55,913 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 07:48:56,284 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 07:48:56,284 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 07:48:56,590 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 07:48:56,591 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 07:48:56,899 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 07:48:56,900 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 07:48:57,213 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 07:48:57,213 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 07:48:57,499 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 07:48:57,500 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 07:48:58,105 - services.scheme_engine - INFO - Loaded 83 schemes from cache
+2026-01-21 07:48:58,105 - services.scheme_engine - INFO - API key found, attempting to fetch from data.gov.in...
+2026-01-21 07:48:58,105 - services.scheme_engine - INFO - Fetching pmfby from data.gov.in...
+2026-01-21 07:48:58,361 - services.scheme_engine - INFO - ✓ Successfully fetched pmfby - 10 records
+2026-01-21 07:48:58,362 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_coverage from data.gov.in...
+2026-01-21 07:48:58,623 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_coverage - 2 records
+2026-01-21 07:48:58,624 - services.scheme_engine - INFO - Fetching pmjjby_pmsby_enrollment from data.gov.in...
+2026-01-21 07:48:58,888 - services.scheme_engine - INFO - ✓ Successfully fetched pmjjby_pmsby_enrollment - 3 records
+2026-01-21 07:48:58,888 - services.scheme_engine - INFO - Fetching matsya_sampada from data.gov.in...
+2026-01-21 07:48:59,155 - services.scheme_engine - INFO - ✓ Successfully fetched matsya_sampada - 10 records
+2026-01-21 07:48:59,156 - services.scheme_engine - INFO - Fetching nsap_goa from data.gov.in...
+2026-01-21 07:48:59,371 - services.scheme_engine - INFO - ✓ Successfully fetched nsap_goa - 0 records
+2026-01-21 07:48:59,371 - services.scheme_engine - INFO - ✓ Successfully fetched 5/5 scheme APIs from data.gov.in
+2026-01-21 07:48:59,507 - core.database - INFO - ✅ Successfully connected to MongoDB
+2026-01-21 07:49:18,227 - api.v1.routes.upload - INFO - Processing file: WhatsApp Image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:49:18,227 - services.ocr_service - INFO - Extracting text from: whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:49:18,690 - services.ocr_service - INFO - OCR extracted 1321 characters from image (Size: (480, 640), Mode: RGB)
+2026-01-21 07:49:18,690 - services.ocr_service - INFO - Extracted 1321 characters from whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:49:18,690 - api.v1.routes.upload - INFO - Extracted text length: 1321 characters
+2026-01-21 07:49:20,906 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:49:20,912 - api.v1.routes.upload - INFO - Successfully processed notice: Court Summon
+2026-01-21 07:50:52,698 - api.v1.routes.schemes - INFO - Returning 83 schemes
+2026-01-21 07:52:47,966 - api.auth - INFO - User logged in: Admin@gmail.com
+2026-01-21 07:53:22,251 - api.v1.routes.upload - INFO - Processing file: WhatsApp Image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:53:22,252 - services.ocr_service - INFO - Extracting text from: whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:53:22,761 - services.ocr_service - INFO - OCR extracted 1321 characters from image (Size: (480, 640), Mode: RGB)
+2026-01-21 07:53:22,762 - services.ocr_service - INFO - Extracted 1321 characters from whatsapp image 2026-01-20 at 22.23.54.jpeg
+2026-01-21 07:53:22,762 - api.v1.routes.upload - INFO - Extracted text length: 1321 characters
+2026-01-21 07:53:25,121 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:53:25,125 - api.v1.routes.upload - INFO - Successfully processed notice: Court Summon
+2026-01-21 07:54:04,177 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:54:04,854 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:54:05,378 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:54:07,022 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-21 07:54:27,798 - api.v1.routes.schemes - INFO - Returning 83 schemes
+2026-01-21 07:54:44,188 - api.v1.routes.schemes - INFO - Finding schemes for: age=20, income=100000
+2026-01-21 07:54:44,189 - api.v1.routes.schemes - INFO - Found 68 eligible schemes
+2026-01-21 07:55:23,210 - api.v1.routes.schemes - INFO - Returning 83 schemes
