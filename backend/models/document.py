@@ -4,6 +4,7 @@ from datetime import datetime
 
 class DocumentBase(BaseModel):
     filename: str
+    title: Optional[str] = None
     notice_type: Optional[str] = None
     severity: Optional[str] = None
     explanation: Dict[str, Any]

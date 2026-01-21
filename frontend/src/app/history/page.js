@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Toast from "../../components/Toast";
+import ConfirmationModal from "../../components/ConfirmationModal";
 
 export default function HistoryPage() {
     const router = useRouter();
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
+    const [toast, setToast] = useState({ message: '', type: 'info' });
+    const [deleteModal, setDeleteModal] = useState({ isOpen: false, docId: null });
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -52,9 +56,14 @@ export default function HistoryPage() {
         router.push('/results');
     };
 
-    const handleDeleteDocument = async (e, docId) => {
-        e.stopPropagation(); // Prevent card click
-        if (!confirm("Are you sure you want to delete this document?")) return;
+    const confirmDelete = (e, docId) => {
+        e.stopPropagation();
+        setDeleteModal({ isOpen: true, docId });
+    };
+
+    const handleDeleteDocument = async () => {
+        const docId = deleteModal.docId;
+        if (!docId) return;
 
         const token = localStorage.getItem("cs_token");
         try {
@@ -67,12 +76,13 @@ export default function HistoryPage() {
 
             if (response.ok) {
                 setDocuments(prev => prev.filter(d => d.id !== docId));
+                setToast({ message: "Document deleted successfully", type: "success" });
             } else {
-                alert("Failed to delete document");
+                setToast({ message: "Failed to delete document", type: "error" });
             }
         } catch (error) {
             console.error("Error deleting document:", error);
-            alert("An error occurred");
+            setToast({ message: "An error occurred", type: "error" });
         }
     };
 
@@ -143,12 +153,10 @@ export default function HistoryPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-slate-900 group-hover:text-[#2F5233] transition-colors mb-1">
-                                            {doc.filename || "Untitled Document"}
+                                            {doc.title || doc.filename || "Untitled Document"}
                                         </h3>
                                         <div className="flex flex-wrap items-center gap-2 text-xs">
-                                            <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded">
-                                                {doc.notice_type || "Unknown Type"}
-                                            </span>
+
                                             {doc.severity && (
                                                 <span className={`px-2 py-0.5 rounded font-medium ${doc.severity.includes("High") || doc.severity.includes("Urgent")
                                                     ? "bg-red-50 text-red-700"
@@ -176,7 +184,7 @@ export default function HistoryPage() {
                                         </svg>
                                     </button>
                                     <button
-                                        onClick={(e) => handleDeleteDocument(e, doc.id)}
+                                        onClick={(e) => confirmDelete(e, doc.id)}
                                         className="p-2 text-red-400 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                                         title="Delete"
                                     >
@@ -192,6 +200,18 @@ export default function HistoryPage() {
             </main>
 
             <Footer />
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast({ ...toast, message: '' })}
+            />
+            <ConfirmationModal
+                isOpen={deleteModal.isOpen}
+                onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
+                onConfirm={handleDeleteDocument}
+                title="Delete Document"
+                message="Are you sure you want to delete this document? This action cannot be undone."
+            />
         </div>
     );
 }
